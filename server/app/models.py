@@ -1,5 +1,5 @@
-from . import db
-from flask_login import UserMixin, AnonymousUserMixin, login_manager
+from . import db, app, login_manager
+from flask_login import UserMixin, AnonymousUserMixin
 from flask import current_app
 from datetime import datetime
 
@@ -19,7 +19,15 @@ class Account(UserMixin, AnonymousUserMixin, db.Model):
 
 @login_manager.user_loader
 def load_user(account):
-    return Account.query.get(int(account))
+    account = Account.query.get(int(account))
+    if account.type == 'student':
+        return Student.query.get(int(account))
+    elif account.type == 'instructor':
+        return Instructor.query.get(int(account))
+    elif account.type == 'leader':
+        return Leader.query.get(int(account))
+    elif account in app.config['FLASKY_ADMIN']:
+        return account
 
 
 class AnonymousUser(AnonymousUserMixin):
@@ -58,7 +66,7 @@ class Teach(db.Model):
         db.String(64),
         db.ForeignKey('classes.id'),
         nullable=False,
-        priamry_key=True)
+        primary_key=True)
 
 
 # 课程安排表
@@ -116,7 +124,7 @@ class Take_exam(db.Model):
 # 学生表
 
 
-class Student(db.Model):
+class Student(db.Model, UserMixin, AnonymousUserMixin):
     __tablename__ = 'students'
     id = db.Column(
         db.String(32),
@@ -125,7 +133,7 @@ class Student(db.Model):
         nullable=False,
         index=True)
     name = db.Column(db.String(32), nullable=False)
-    year = db.Coulmn(db.String(32), nullable=False)
+    year = db.Column(db.String(32), nullable=False)
     curricula_student = db.relationship(
         'Curricula_variable',
         foreign_keys=[
@@ -135,11 +143,15 @@ class Student(db.Model):
             lazy='joined'),
         lazy='dynamic',
         cascade='all, delete-orphan')
-    exam_student = db.relatioship('Take_exam',
-                                  foreign_keys=[Take_exam.student_id],
-                                  backref=db.backref('student', lazy='joined'),
-                                  lazy='dynamic',
-                                  cascade='all, delete-orphan')
+    exam_student = db.relationship(
+        'Take_exam',
+        foreign_keys=[
+            Take_exam.student_id],
+        backref=db.backref(
+            'student',
+            lazy='joined'),
+        lazy='dynamic',
+        cascade='all, delete-orphan')
 
     # 学生当前的年级
     def grade(self):
@@ -147,7 +159,7 @@ class Student(db.Model):
 
 
 # 教师表
-class Instructor(db.Model):
+class Instructor(db.Model, UserMixin, AnonymousUserMixin):
     __tablename__ = 'instructors'
     id = db.Column(db.String(32), primary_key=True, nullable=False, index=True)
     name = db.Column(db.String(32), nullable=False)
@@ -159,12 +171,21 @@ class Instructor(db.Model):
         cascade='all, delete-orphan'
     )
 
+
+# 领导表
+
+class Leader(db.Model, UserMixin, AnonymousUserMixin):
+    __tablename__ = 'leaders'
+    id = db.Column(db.String(32), primary_key=True, nullable=False, index=True)
+    name = db.Column(db.String(32), nullable=False)
+
+
 # 课程表
 
 
 class Course(db.Model):
     __tablename__ = 'courses'
-    id = db.Coolumn(
+    id = db.Column(
         db.String(32),
         primary_key=True,
         nullable=False,
@@ -208,7 +229,7 @@ class Classroom(db.Model):
 
 class Class(db.Model):
     __tablename__ = 'classes'
-    id = db.Column(db.String(64), priamry_key=True, index=True, nullable=False)
+    id = db.Column(db.String(64), primary_key=True, index=True, nullable=False)
     year = db.Column(db.Integer, nullable=False)
     term = db.Column(db.Integer, nullable=False)
     course_id = db.Column(db.String(64), db.ForeignKey('courses.id'))
@@ -250,12 +271,12 @@ class Exam(db.Model):
         nullable=False)
     datetime = db.Column(db.DateTime, nullable=False)
     exam_room = db.relationship('Exam_room',
-                                froeign_keys=[Exam_room.exam_id],
+                                foreign_keys=[Exam_room.exam_id],
                                 backref=db.backref('exam', lazy='joined'),
                                 lazy='dynamic',
                                 cascade='all, delete-orphan')
     exam_stu = db.relationship('Take_exam',
-                               foreign_key=[Take_exam.exam_id],
+                               foreign_keys=[Take_exam.exam_id],
                                backref=db.backref('exam', lazy='joined'),
                                lazy='dynamic',
                                cascade='all,delete-orphan')
