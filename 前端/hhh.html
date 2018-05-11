@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>教务系统 - 学生端</title>
+  <link rel="stylesheet" href="./layui/css/layui.css">
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo">教务系统 - 学生端</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item"><a href="">控制台</a></li>
+      <li class="layui-nav-item"><a href="">商品管理</a></li>
+      <li class="layui-nav-item"><a href="">用户</a></li>
+      <li class="layui-nav-item">
+        <a>其它系统</a>
+        <dl class="layui-nav-child">
+          <dd><a href="">邮件管理</a></dd>
+          <dd><a href="">消息管理</a></dd>
+          <dd><a href="">授权管理</a></dd>
+        </dl>
+      </li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a>
+          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+          罗阳豪
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">基本资料</a></dd>
+          <dd><a href="">重置密码</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="">注销</a></li>
+    </ul>
+  </div>
+
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item layui-nav-itemed">
+          <a>查看课表</a>
+          <dl class="layui-nav-child">
+            <dd><a href="">列表一</a></dd>
+            <dd><a href="">列表二</a></dd>
+            <dd><a href="">列表三</a></dd>
+            <dd><a href="">超链接</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
+          <a>解决方案</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;">列表一</a></dd>
+            <dd><a href="javascript:;">列表二</a></dd>
+            <dd><a href="">超链接</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item"><a href="./content/stu_mine_class.html" target="content">云市场</a></li>
+        <li class="layui-nav-item"><a href="http://www.baidu.com/" target="content">发布商品</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+    <iframe id="content" name="content" height="99%" width="100%" onload="change_url()"></iframe>
+    <div style="padding: 15px;">内容主体区域</div>
+  </div>
+
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    Copyright &copy; 2018-2019
+    <a class="signature" href="https://github.com/Keyboard-l">Keyboard-l</a>,
+    <a class="signature" href="https://github.com/oneSaber">oneSaber</a> and
+    <a class="signature" href="https://github.com/bigPeterPan">bigPeterPan</a>
+    All Rights Reserved.
+  </div>
+</div>
+
+<!-- JavaScript -->
+<script src="./layui/layui.js"></script>
+<script src="./js/jquery.js"></script>
+<script src="./js/main.js"></script>
+</body>
+</html>

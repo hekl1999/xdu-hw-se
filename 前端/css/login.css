@@ -1,0 +1,25 @@
+body {
+    background-color: #003158;
+}
+
+section.login-section {
+    margin-top: 100px;
+}
+
+div.login-panel {
+    border-radius: 0;
+    border-color: #0078d7;
+}
+div.login-panel div.login-heading {
+    border-radius: 0;
+    background-color: #0078d7;
+    color: #ffffff;
+}
+button.btn.btn-default {
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 0;
+    border-color: #0078d7;
+    background-color: #0078d7;
+    color: #ffffff;
+}
