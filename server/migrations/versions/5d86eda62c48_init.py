@@ -1,8 +1,8 @@
-"""add leader
+"""init
 
-Revision ID: 8c178fbbfc9b
+Revision ID: 5d86eda62c48
 Revises: 
-Create Date: 2018-05-08 22:10:43.899483
+Create Date: 2018-05-11 21:13:28.288189
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '8c178fbbfc9b'
+revision = '5d86eda62c48'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -25,6 +25,12 @@ def upgrade():
     sa.PrimaryKeyConstraint('account')
     )
     op.create_index(op.f('ix_accounts_account'), 'accounts', ['account'], unique=True)
+    op.create_table('admins',
+    sa.Column('id', sa.String(length=32), nullable=False),
+    sa.Column('name', sa.String(length=32), nullable=False),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_admins_id'), 'admins', ['id'], unique=False)
     op.create_table('classrooms',
     sa.Column('id', sa.String(length=32), nullable=False),
     sa.Column('building', sa.String(length=32), nullable=False),
@@ -50,12 +56,6 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_instructors_id'), 'instructors', ['id'], unique=False)
-    op.create_table('leaders',
-    sa.Column('id', sa.String(length=32), nullable=False),
-    sa.Column('name', sa.String(length=32), nullable=False),
-    sa.PrimaryKeyConstraint('id')
-    )
-    op.create_index(op.f('ix_leaders_id'), 'leaders', ['id'], unique=False)
     op.create_table('students',
     sa.Column('id', sa.String(length=32), nullable=False),
     sa.Column('name', sa.String(length=32), nullable=False),
@@ -63,6 +63,12 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_students_id'), 'students', ['id'], unique=True)
+    op.create_table('superiors',
+    sa.Column('id', sa.String(length=32), nullable=False),
+    sa.Column('name', sa.String(length=32), nullable=False),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_superiors_id'), 'superiors', ['id'], unique=False)
     op.create_table('classes',
     sa.Column('id', sa.String(length=64), nullable=False),
     sa.Column('year', sa.Integer(), nullable=False),
@@ -144,10 +150,10 @@ def downgrade():
     op.drop_table('curricula_variables')
     op.drop_index(op.f('ix_classes_id'), table_name='classes')
     op.drop_table('classes')
+    op.drop_index(op.f('ix_superiors_id'), table_name='superiors')
+    op.drop_table('superiors')
     op.drop_index(op.f('ix_students_id'), table_name='students')
     op.drop_table('students')
-    op.drop_index(op.f('ix_leaders_id'), table_name='leaders')
-    op.drop_table('leaders')
     op.drop_index(op.f('ix_instructors_id'), table_name='instructors')
     op.drop_table('instructors')
     op.drop_index(op.f('ix_courses_type'), table_name='courses')
@@ -156,6 +162,8 @@ def downgrade():
     op.drop_table('courses')
     op.drop_index(op.f('ix_classrooms_id'), table_name='classrooms')
     op.drop_table('classrooms')
+    op.drop_index(op.f('ix_admins_id'), table_name='admins')
+    op.drop_table('admins')
     op.drop_index(op.f('ix_accounts_account'), table_name='accounts')
     op.drop_table('accounts')
     # ### end Alembic commands ###

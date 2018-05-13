@@ -1,7 +1,7 @@
 from .. import app, db,login_manager
-from flask import request, current_app, jsonify,make_response
-from ..models import Account, Student, Instructor, Leader
-from flask_login import login_user, logout_user, current_user,login_required
+from flask import request, current_app, jsonify, make_response
+from ..models import Account, Student, Instructor, Superior, Admin
+from flask_login import login_user, logout_user, current_user, login_required
 from . import main
 
 login_manager.login_view = 'main.no_login'
@@ -9,31 +9,39 @@ login_manager.login_view = 'main.no_login'
 
 @main.route('/no_login')
 def no_login():
-    return "no login", 404
+    return "no login", 401
 
 
 @main.route('/login', methods=['POST'])
 def login():
     data = request.form
-    account = data['account']
+    account = data.get('account')
+    password = data.get('password')
+    remember_me = data.get('remember_me')
+    if account is None or password is None or remember_me is None:
+        return jsonify({'message': 'data missing'}), 400
     user = Account.query.filter(account=account).first()
     if user is not None:
-        if user.password == data['password']:
-            s = Student.query.filter_by(id=account).first()
-            if s is not None:
-                login_user(s, remember=data['remember_me'])
+        if user.password == password:
+            if user.type == 'Student':
+                s = Student.query.filter_by(id=account).first()
+                login_user(s, remember_me)
                 return jsonify({'type': 'student'})
-            i = Instructor.query.filter_by(id=account).first()
-            if i is not None:
-                login_user(i, remember=data['remember_me'])
+            if user.type == 'Instructor':
+                i = Instructor.query.filter_by(id=account).first()
+                login_user(i, remember=remember_me)
                 return jsonify({'type': 'instructor'})
-            l = Leader.query.filter_by(id=account).first()
-            if l is not None:
-                login_user(l, remember=data['remember_me'])
-                return jsonify({'type': 'leader'})
+            if user.type == 'Superior':
+                S = Superior.query.filter_by(id=account).first()
+                login_user(S, remember=remember_me)
+                return jsonify({'type': 'superior'})
+            if user.type == 'Admin':
+                a = Admin.query.filter_by(id=account).first()
+                login_user(a,remember_me)
+                return jsonify({'type': 'admin'})
             if account in app.config['FLASKY_ADMIN']:
-                login_user(user, remember=data['remember_me'])
-                return jsonify({'type:admin'})
+                login_user(user, remember=remember_me)
+                return jsonify({'type:root'})
             return jsonify({'message': 'type error'}), 400
         return jsonify({'message': 'password error'}), 403
     return jsonify({'message': 'no account'}), 404

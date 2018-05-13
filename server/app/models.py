@@ -25,7 +25,9 @@ def load_user(account):
     elif account.type == 'instructor':
         return Instructor.query.get(int(account))
     elif account.type == 'leader':
-        return Leader.query.get(int(account))
+        return Superior.query.get(int(account))
+    elif account.type == 'Admin':
+        return Admin.query.get(int(account))
     elif account in app.config['FLASKY_ADMIN']:
         return account
 
@@ -51,7 +53,10 @@ class Curricula_variable(db.Model):
         db.ForeignKey('classes.id'),
         nullable=False,
         primary_key=True)
-    grade = db.Column(db.Integer, nullable=False)
+    grade = db.Column(db.Integer)
+
+
+
 
 
 # 教学表
@@ -174,11 +179,17 @@ class Instructor(db.Model, UserMixin, AnonymousUserMixin):
 
 # 领导表
 
-class Leader(db.Model, UserMixin, AnonymousUserMixin):
-    __tablename__ = 'leaders'
+class Superior(db.Model, UserMixin, AnonymousUserMixin):
+    __tablename__ = 'superiors'
     id = db.Column(db.String(32), primary_key=True, nullable=False, index=True)
     name = db.Column(db.String(32), nullable=False)
 
+
+# 管理员
+class Admin(db.Model, UserMixin, AnonymousUserMixin):
+    __tablename__ = 'admins'
+    id = db.Column(db.String(32), primary_key=True, nullable=False, index=True)
+    name = db.Column(db.String(32), nullable=False)
 
 # 课程表
 
@@ -234,6 +245,7 @@ class Class(db.Model):
     term = db.Column(db.Integer, nullable=False)
     course_id = db.Column(db.String(64), db.ForeignKey('courses.id'))
     number = db.Column(db.Integer, nullable=False)
+    max_people = db.Column(db.Integer,nullable=False)  # 最大可选人数
     exam = db.relationship('Exam', backref='class', lazy='dynamic')
     choose = db.Column(db.Boolean)  # 课程是否可选
     curricula_class = db.relationship(
@@ -256,7 +268,7 @@ class Class(db.Model):
             Schedule.class_id],
         backref=db.backref(
             'class',
-            lzay='joined'),
+            lazy='joined'),
         lazy='dynamic',
         cascade='all,delete-orphan')
 
