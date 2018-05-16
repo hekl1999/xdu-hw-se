@@ -138,7 +138,7 @@ class Student(db.Model, UserMixin, AnonymousUserMixin):
         nullable=False,
         index=True)
     name = db.Column(db.String(32), nullable=False)
-    year = db.Column(db.String(32), nullable=False)
+    year = db.Column(db.Integer, nullable=False)
     curricula_student = db.relationship(
         'Curricula_variable',
         foreign_keys=[
@@ -245,7 +245,7 @@ class Class(db.Model):
     term = db.Column(db.Integer, nullable=False)
     course_id = db.Column(db.String(64), db.ForeignKey('courses.id'))
     number = db.Column(db.Integer, nullable=False)
-    max_people = db.Column(db.Integer,nullable=False)  # 最大可选人数
+    max_people = db.Column(db.Integer, nullable=False)  # 最大可选人数
     exam = db.relationship('Exam', backref='class', lazy='dynamic')
     choose = db.Column(db.Boolean)  # 课程是否可选
     curricula_class = db.relationship(
@@ -281,7 +281,8 @@ class Exam(db.Model):
         db.String(64),
         db.ForeignKey('classes.id'),
         nullable=False)
-    datetime = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.String(64), nullable=False)  # 日期 格式为 年/月/日
+    time = db.Column(db.String(64), nullable=False)   # 时间 格式为24小时制 hour:minute
     exam_room = db.relationship('Exam_room',
                                 foreign_keys=[Exam_room.exam_id],
                                 backref=db.backref('exam', lazy='joined'),

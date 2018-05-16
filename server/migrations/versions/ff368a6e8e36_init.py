@@ -1,8 +1,8 @@
 """init
 
-Revision ID: 5d86eda62c48
+Revision ID: ff368a6e8e36
 Revises: 
-Create Date: 2018-05-11 21:13:28.288189
+Create Date: 2018-05-16 12:42:52.448634
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5d86eda62c48'
+revision = 'ff368a6e8e36'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -59,7 +59,7 @@ def upgrade():
     op.create_table('students',
     sa.Column('id', sa.String(length=32), nullable=False),
     sa.Column('name', sa.String(length=32), nullable=False),
-    sa.Column('year', sa.String(length=32), nullable=False),
+    sa.Column('year', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_students_id'), 'students', ['id'], unique=True)
@@ -75,6 +75,7 @@ def upgrade():
     sa.Column('term', sa.Integer(), nullable=False),
     sa.Column('course_id', sa.String(length=64), nullable=True),
     sa.Column('number', sa.Integer(), nullable=False),
+    sa.Column('max_people', sa.Integer(), nullable=False),
     sa.Column('choose', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['course_id'], ['courses.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -83,7 +84,7 @@ def upgrade():
     op.create_table('curricula_variables',
     sa.Column('student_id', sa.String(length=32), nullable=False),
     sa.Column('class_id', sa.String(length=64), nullable=False),
-    sa.Column('grade', sa.Integer(), nullable=False),
+    sa.Column('grade', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['class_id'], ['classes.id'], ),
     sa.ForeignKeyConstraint(['student_id'], ['students.id'], ),
     sa.PrimaryKeyConstraint('student_id', 'class_id')
