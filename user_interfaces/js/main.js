@@ -3,18 +3,17 @@ layui.use('element', function(){
     var element = layui.element;
 
 });
+
 function change_url() {
     var frame_url = window.frames[0].window.location.href;
     setCookie('frame_url', frame_url, 1);
 }
-function setCookie(c_name, value, expiredays)
-{
+function setCookie(c_name, value, expiredays) {
     var exdate = new Date();
     exdate.setDate(exdate.getDate() + expiredays);
     document.cookie = c_name + "=" + escape(value) + ((expiredays==null) ? "" : ";expires=" + exdate.toGMTString());
 }
-function getCookie(c_name)
-{
+function getCookie(c_name) {
     if (document.cookie.length > 0) {
         c_start = document.cookie.indexOf(c_name + "=");
         if (c_start != -1) {
@@ -27,5 +26,6 @@ function getCookie(c_name)
     }
     return "";
 }
+
 if (getCookie('frame_url'))
     $('#content').attr('src', getCookie('frame_url'));
