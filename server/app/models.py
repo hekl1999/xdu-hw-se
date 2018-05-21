@@ -3,7 +3,6 @@ from flask_login import UserMixin, AnonymousUserMixin
 from flask import current_app
 from datetime import datetime
 
-
 # 账户表
 class Account(UserMixin, AnonymousUserMixin, db.Model):
     __tablename__ = 'accounts'
@@ -56,9 +55,6 @@ class Curricula_variable(db.Model):
     grade = db.Column(db.Integer)
 
 
-
-
-
 # 教学表
 class Teach(db.Model):
     __tablename__ = 'teaches'
@@ -77,16 +73,15 @@ class Teach(db.Model):
 # 课程安排表
 class Schedule(db.Model):
     __tablename__ = 'schedules'
+    id = db.Column(db.Integer, primary_key=True)
     class_id = db.Column(
         db.String(64),
         db.ForeignKey('classes.id'),
-        nullable=False,
-        primary_key=True)
+        nullable=False)
     classroom_id = db.Column(
         db.String(32),
         db.ForeignKey('classrooms.id'),
-        nullable=False,
-        primary_key=True)
+        nullable=False)
     week = db.Column(db.Integer, nullable=False)
     day = db.Column(db.Integer, nullable=False)
     section = db.Column(db.Integer, nullable=False)
@@ -95,17 +90,16 @@ class Schedule(db.Model):
 # 考场安排表
 class Exam_room(db.Model):
     __tablename__ = 'exam_rooms'
+    id = db.Column(db.Integer, primary_key=True)
     exam_id = db.Column(
         db.String(16),
         db.ForeignKey('exams.id'),
         nullable=False,
-        primary_key=True,
         index=True)
     classroom_id = db.Column(
         db.String(32),
         db.ForeignKey('classrooms.id'),
         nullable=False,
-        primary_key=True,
         index=True)
 
 
@@ -158,9 +152,6 @@ class Student(db.Model, UserMixin, AnonymousUserMixin):
         lazy='dynamic',
         cascade='all, delete-orphan')
 
-    # 学生当前的年级
-    def grade(self):
-        return datetime.now().year - self.year
 
 
 # 教师表
@@ -246,20 +237,20 @@ class Class(db.Model):
     course_id = db.Column(db.String(64), db.ForeignKey('courses.id'))
     number = db.Column(db.Integer, nullable=False)
     max_people = db.Column(db.Integer, nullable=False)  # 最大可选人数
-    exam = db.relationship('Exam', backref='class', lazy='dynamic')
-    choose = db.Column(db.Boolean)  # 课程是否可选
+    exam = db.relationship('Exam', backref='classes', lazy='dynamic')
+    optional = db.Column(db.Boolean)  # 课程是否可选
     curricula_class = db.relationship(
         'Curricula_variable',
         foreign_keys=[
             Curricula_variable.class_id],
         backref=db.backref(
-            'class',
+            'classes',
             lazy='joined'),
         lazy='dynamic',
         cascade='all, delete-orphan')
     teach_class = db.relationship('Teach',
                                   foreign_keys=[Teach.class_id],
-                                  backref=db.backref('class', lazy='joined'),
+                                  backref=db.backref('classes', lazy='joined'),
                                   lazy='dynamic',
                                   cascade='all, delete-orphan')
     schedule_class = db.relationship(
@@ -267,7 +258,7 @@ class Class(db.Model):
         foreign_keys=[
             Schedule.class_id],
         backref=db.backref(
-            'class',
+            'classes',
             lazy='joined'),
         lazy='dynamic',
         cascade='all,delete-orphan')
@@ -277,7 +268,7 @@ class Class(db.Model):
 class Exam(db.Model):
     __tablename__ = 'exams'
     id = db.Column(db.String(16), primary_key=True, index=True)
-    class_id = db.Column(
+    classes_id = db.Column(
         db.String(64),
         db.ForeignKey('classes.id'),
         nullable=False)

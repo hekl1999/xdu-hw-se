@@ -24,7 +24,7 @@ class DevelopmentConfig(Config):
 # 测试环境
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@127.0.0.1:3306/text'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@39.105.64.7:3306/data_test'
 
 # 生产环境
 class ProductionConfig(Config):
