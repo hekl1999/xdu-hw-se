@@ -15,6 +15,9 @@ class Account(UserMixin, AnonymousUserMixin, db.Model):
     password = db.Column(db.String(32), nullable=False)
     type = db.Column(db.String(16), nullable=False)
 
+    def show(self):
+        return [self.account,self.password,self.type]
+
 
 @login_manager.user_loader
 def load_user(account):
@@ -54,6 +57,8 @@ class Curricula_variable(db.Model):
         primary_key=True)
     grade = db.Column(db.Integer)
 
+    def show(self):
+        return [self.student_id,self.class_id,self.grade]
 
 # 教学表
 class Teach(db.Model):
@@ -69,6 +74,8 @@ class Teach(db.Model):
         nullable=False,
         primary_key=True)
 
+    def show(self):
+        return [self.instructor_id,self.class_id]
 
 # 课程安排表
 class Schedule(db.Model):
@@ -86,6 +93,8 @@ class Schedule(db.Model):
     day = db.Column(db.Integer, nullable=False)
     section = db.Column(db.Integer, nullable=False)
 
+    def show(self):
+        return [self.id,self.class_id,self.classroom_id,self.week,self.day,self.section]
 
 # 考场安排表
 class Exam_room(db.Model):
@@ -101,6 +110,9 @@ class Exam_room(db.Model):
         db.ForeignKey('classrooms.id'),
         nullable=False,
         index=True)
+
+    def show(self):
+        return [self.id,self.exam_id,self.classroom_id]
 
 
 # 考试成绩表
@@ -120,6 +132,8 @@ class Take_exam(db.Model):
         index=True)
     exam_grade = db.Column(db.Integer)
 
+    def show(self):
+        return [self.exam_id,self.student_id,self.exam_grade]
 # 学生表
 
 
@@ -152,7 +166,8 @@ class Student(db.Model, UserMixin, AnonymousUserMixin):
         lazy='dynamic',
         cascade='all, delete-orphan')
 
-
+    def show(self):
+        return [self.id,self.name,self.year]
 
 # 教师表
 class Instructor(db.Model, UserMixin, AnonymousUserMixin):
@@ -166,7 +181,8 @@ class Instructor(db.Model, UserMixin, AnonymousUserMixin):
         lazy='dynamic',
         cascade='all, delete-orphan'
     )
-
+    def show(self):
+        return [self.id,self.name]
 
 # 领导表
 
@@ -175,6 +191,8 @@ class Superior(db.Model, UserMixin, AnonymousUserMixin):
     id = db.Column(db.String(32), primary_key=True, nullable=False, index=True)
     name = db.Column(db.String(32), nullable=False)
 
+    def show(self):
+        return [self.id, self.name]
 
 # 管理员
 class Admin(db.Model, UserMixin, AnonymousUserMixin):
@@ -182,6 +200,8 @@ class Admin(db.Model, UserMixin, AnonymousUserMixin):
     id = db.Column(db.String(32), primary_key=True, nullable=False, index=True)
     name = db.Column(db.String(32), nullable=False)
 
+    def show(self):
+        return [self.id, self.name]
 # 课程表
 
 
@@ -199,6 +219,8 @@ class Course(db.Model):
     period = db.Column(db.Integer, nullable=False)
     classes = db.relationship('Class', backref='course', lazy='dynamic')
 
+    def show(self):
+        return [self.id,self.name,self.type,self.credit,self.period,self.classes]
 
 # 教室
 class Classroom(db.Model):
@@ -225,6 +247,9 @@ class Classroom(db.Model):
             lazy='joined'),
         lazy='dynamic',
         cascade='all, delete-orphan')
+
+    def show(self):
+        return [self.id,self.building,self.floor,self.number]
 
 # 教学班表
 
@@ -263,6 +288,8 @@ class Class(db.Model):
         lazy='dynamic',
         cascade='all,delete-orphan')
 
+    def show(self):
+        return [self.id,self.year,self.term,self.course_id,self.number,self.max_people,self.optional]
 
 # 考试表
 class Exam(db.Model):
@@ -284,3 +311,5 @@ class Exam(db.Model):
                                backref=db.backref('exam', lazy='joined'),
                                lazy='dynamic',
                                cascade='all,delete-orphan')
+    def show(self):
+        return [self.id,self.classes_id,self.date,self.time]

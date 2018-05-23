@@ -3,7 +3,7 @@ from ..models import *
 from flask_login import current_user, login_required
 from .. import app, db
 from . import teacher
-
+import json
 
 @teacher.route('/tea_class_info')
 @login_required
@@ -44,4 +44,53 @@ def class_info():
     return jsonify(result)
 
 
-@teacher.route('/')
+@teacher.route('/tea_insert_grade',methods=['PUT','POST'])
+@login_required
+def insert_grade():
+    data = json.loads(request.data)
+    class_id = data.get('class_id')
+    if class_id is None:
+        return jsonify({'message': 'no class_id'}), 403
+    input_grades = data.get('grade')
+    if input_grades is None or len(input_grades) == 0:
+        return jsonify({'message': 'no grade'}), 403
+    class_info = Class.query.filter_by(id=class_id).first()
+    if class_info is None:
+        return jsonify({'message': 'no class'}), 404
+    if Teach.query.filter_by(class_id=class_id,instructor_id=current_user.id).first() is None:
+        return jsonify({'message': 'not teach this class'}), 403
+    all_students = Curricula_variable.query.filter_by(class_id=class_id).all()
+    for grade_data in input_grades:
+        bad_data = []
+        try:
+            student = Curricula_variable.query.filter_by(student_id=grade_data.get('student_id')).first()
+            if student is None or student not in all_students:
+                bad_data.append(grade_data.get('student_id'))
+            else:
+                student.grade = grade_data.get('grade')
+                db.session.add(student)
+        except:
+            bad_data.append(grade_data.get('student_id'))
+    db.session.commit()
+    return jsonify(bad_data), 200
+
+
+@teacher.route('/exam_info')
+@login_required
+def exam_info():
+    my_teaches = Teach.query.filter_by(instructor_id=current_user.id).all()
+    if len(my_teaches) > 0:
+        result = []
+        for my_teach in my_teaches:
+            # 一门课可以安排多个时间考试
+            exam_infos = Exam.query.filter_by(class_id=my_teach.class_id).all()
+            for exam in exam_infos:
+                re = {'date': exam.date,
+                      'time': exam.time,
+                      'course_name': my_teach.classes.course.name}
+                exam_rooms = Exam_room.query.filter_by(exam_id=exam.id).all()
+                re['classroom_id'] = [ex.classroom.id for ex in exam_rooms]
+                result.append(re)
+        return jsonify(result)
+    else:
+        return jsonify({'message': 'no data'}), 404

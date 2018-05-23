@@ -23,5 +23,8 @@ def create_app(config_name):
 
     from .teacher import teacher as teacher_blueprint
     app.register_blueprint(teacher_blueprint)
-    
+
+    from .root import root as root_blueprint
+    app.register_blueprint(root_blueprint)
+
     return app
