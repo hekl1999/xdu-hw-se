@@ -107,7 +107,7 @@ def choice_class():
     # 学生年级
     if ((datetime.year - current_user.year > 1)
             or (datetime.year - current_user == 1 and datetime.month > 9))and last_people > 0:
-        new_choose = Curricula_variable(class_id = class_id,student_id = current_user.id,grade = 0)
+        new_choose = Curricula_variable(classes=class_info, student=current_user, grade=0)
         db.session.add(new_choose)
         db.session.commit()
         return jsonify({'message': 'choose successful'})

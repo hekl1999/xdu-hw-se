@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="77b327d5-eb15-47ab-a6c1-9619a72f8571" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/user_interfaces/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user_interfaces/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user_interfaces/change_passwd.html" beforeDir="false" afterPath="$PROJECT_DIR$/user_interfaces/change_passwd.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user_interfaces/js/leader.js" beforeDir="false" afterPath="$PROJECT_DIR$/user_interfaces/js/leader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user_interfaces/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/user_interfaces/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user_interfaces/test_server/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_interfaces/test_server/manage.py" afterDir="false" />
+=======
+    <list default="true" id="20c7473f-ad90-4985-9482-938f3ace99f4" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/SE-Project.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/app/root/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/app/root/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app/teacher/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/teacher/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/设计/接口/第一阶段接口文档草案.md" beforeDir="false" afterPath="$PROJECT_DIR$/设计/接口/第一阶段接口文档草案.md" afterDir="false" />
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,15 +32,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/app/models.py">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/app/teacher/views.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="6615">
               <caret line="245" column="23" selection-start-line="245" selection-start-column="23" selection-end-line="245" selection-end-column="23" />
+=======
+            <state relative-caret-position="2064">
+              <caret line="95" column="51" selection-start-line="95" selection-start-column="51" selection-end-line="95" selection-end-column="51" />
+              <folding>
+                <element signature="e#0#47#0" expanded="true" />
+              </folding>
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="数据库模式设计文档.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/设计/数据库/数据库模式设计文档.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
@@ -41,12 +65,22 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1566">
               <caret line="58" column="20" selection-start-line="58" selection-start-column="20" selection-end-line="61" selection-end-column="37" />
+=======
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/app/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="553">
+              <caret line="314" column="59" selection-start-line="314" selection-start-column="59" selection-end-line="314" selection-end-column="59" />
+              <folding>
+                <element signature="e#0#36#0" expanded="true" />
+              </folding>
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/app/student/__init__.py">
+        <entry file="file://$PROJECT_DIR$/server/app/root/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="108">
               <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
@@ -57,24 +91,71 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/app/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="567">
               <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
+=======
+            <state relative-caret-position="576">
+              <caret line="27" column="41" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/app/root/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1104">
+              <caret line="46" column="26" lean-forward="true" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="第一阶段接口文档草案.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/设计/接口/第一阶段接口文档草案.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-10191" />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/app/student/views.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="245">
               <caret line="116" lean-forward="true" selection-start-line="116" selection-end-line="116" />
+=======
+            <state relative-caret-position="3144">
+              <caret line="136" column="25" selection-start-line="136" selection-start-column="25" selection-end-line="136" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+              </folding>
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="manage.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/manage.py">
           <provider selected="true" editor-type-id="text-editor" />
+=======
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/app/main/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
         </entry>
       </file>
     </leaf>
@@ -86,24 +167,17 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>lzay</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/server/app/student/__init__.py" />
+        <option value="$PROJECT_DIR$/server/app/root/__init__.py" />
         <option value="$PROJECT_DIR$/server/app/__init__.py" />
-        <option value="$PROJECT_DIR$/server/app/main/views.py" />
-        <option value="$PROJECT_DIR$/设计/数据库/数据库模式设计文档.md" />
+        <option value="$PROJECT_DIR$/server/app/teacher/views.py" />
         <option value="$PROJECT_DIR$/server/app/models.py" />
-        <option value="$PROJECT_DIR$/设计/接口/第一阶段接口文档草案.md" />
-        <option value="$PROJECT_DIR$/server/app/student/views.py" />
+        <option value="$PROJECT_DIR$/server/app/root/views.py" />
       </list>
     </option>
   </component>
@@ -117,10 +191,17 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
+<<<<<<< HEAD
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
+=======
+    <option name="x" value="1920" />
+    <option name="y" value="-344" />
+    <option name="width" value="1785" />
+    <option name="height" value="1090" />
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -157,6 +238,13 @@
               <item name="SE-Project" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="root" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SE-Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SE-Project" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="student" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -170,12 +258,6 @@
               <item name="设计" type="462c0819:PsiDirectoryNode" />
               <item name="接口" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="SE-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SE-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="设计" type="462c0819:PsiDirectoryNode" />
-              <item name="数据库" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -183,11 +265,14 @@
       <pane id="Scope" />
     </panes>
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/user_interfaces" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
+=======
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -205,12 +290,16 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="77b327d5-eb15-47ab-a6c1-9619a72f8571" name="Default" comment="" />
-      <created>1526036954937</created>
+      <changelist id="20c7473f-ad90-4985-9482-938f3ace99f4" name="Default" comment="" />
+      <created>1526910709615</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< HEAD
       <updated>1526036954937</updated>
       <workItem from="1526821373166" duration="41000" />
+=======
+      <updated>1526910709615</updated>
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
     </task>
     <servers />
   </component>
@@ -221,16 +310,27 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.159375" />
+=======
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18648249" />
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
+<<<<<<< HEAD
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.17513514" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+=======
+      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3693957" />
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -248,8 +348,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/设计/数据库/数据库模式设计文档.md">
+    <entry file="file://$PROJECT_DIR$/server/app/teacher/views.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="1608">
           <caret line="67" column="45" selection-start-line="67" selection-start-column="45" selection-end-line="67" selection-end-column="45" />
         </state>
@@ -259,10 +360,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1296">
           <caret line="58" column="20" selection-start-line="58" selection-start-column="20" selection-end-line="61" selection-end-column="37" />
+=======
+        <state relative-caret-position="2160">
+          <caret line="95" column="51" lean-forward="true" selection-start-line="95" selection-start-column="51" selection-end-line="95" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/app/student/__init__.py">
+    <entry file="file://$PROJECT_DIR$/server/app/root/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
@@ -271,13 +379,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/app/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="432">
           <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
+=======
+        <state relative-caret-position="576">
+          <caret line="27" column="41" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/app/student/views.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="360">
           <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
         </state>
@@ -394,11 +511,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1152">
           <caret line="52" column="27" selection-start-line="52" selection-start-column="27" selection-end-line="52" selection-end-column="27" />
+=======
+        <state relative-caret-position="3144">
+          <caret line="136" column="25" selection-start-line="136" selection-start-column="25" selection-end-line="136" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/app/models.py">
+    <entry file="file://$PROJECT_DIR$/server/app/main/views.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/root/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/teacher/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="6912">
           <caret line="291" column="4" lean-forward="true" selection-start-line="291" selection-start-column="4" selection-end-line="291" selection-end-column="4" />
         </state>
@@ -419,6 +563,17 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/app/student/__init__.py">
+=======
+        <state relative-caret-position="2184">
+          <caret line="96" lean-forward="true" selection-start-line="96" selection-end-line="96" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/root/__init__.py">
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
@@ -427,13 +582,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/app/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="432">
           <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
+=======
+        <state relative-caret-position="576">
+          <caret line="27" column="41" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/app/student/views.py">
+    <entry file="file://$PROJECT_DIR$/server/app/root/views.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="1152">
           <caret line="52" column="27" selection-start-line="52" selection-start-column="27" selection-end-line="52" selection-end-column="27" />
         </state>
@@ -464,6 +628,26 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/app/student/__init__.py">
+=======
+        <state relative-caret-position="24">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/teacher/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/root/__init__.py">
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
@@ -472,6 +656,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/app/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="432">
           <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
         </state>
@@ -526,11 +711,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+=======
+        <state relative-caret-position="576">
+          <caret line="27" column="41" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/app/__init__.py">
+    <entry file="file://$PROJECT_DIR$/server/app/main/views.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/student/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3144">
+          <caret line="136" column="25" selection-start-line="136" selection-start-column="25" selection-end-line="136" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/teacher/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="567">
           <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
         </state>
@@ -591,22 +803,40 @@
         <state relative-caret-position="245">
           <caret line="116" lean-forward="true" selection-start-line="116" selection-end-line="116" />
         </state>
+=======
+        <state relative-caret-position="2064">
+          <caret line="95" column="51" selection-start-line="95" selection-start-column="51" selection-end-line="95" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ScopeChooserConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+    <entry file="file://$PROJECT_DIR$/server/app/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="553">
+          <caret line="314" column="59" selection-start-line="314" selection-start-column="59" selection-end-line="314" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app/root/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1104">
+          <caret line="46" column="26" lean-forward="true" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/设计/接口/第一阶段接口文档草案.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-10191" />
+>>>>>>> 01a99494e44d59ea750b3908bed8f3c0561c360f
+      </provider>
+    </entry>
   </component>
 </project>

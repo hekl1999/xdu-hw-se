@@ -3,7 +3,6 @@ from flask_login import UserMixin, AnonymousUserMixin
 from flask import current_app
 from datetime import datetime
 
-
 # 账户表
 class Account(UserMixin, AnonymousUserMixin, db.Model):
     __tablename__ = 'accounts'
@@ -15,6 +14,9 @@ class Account(UserMixin, AnonymousUserMixin, db.Model):
         index=True)
     password = db.Column(db.String(32), nullable=False)
     type = db.Column(db.String(16), nullable=False)
+
+    def show(self):
+        return [self.account,self.password,self.type]
 
 
 @login_manager.user_loader
@@ -55,9 +57,8 @@ class Curricula_variable(db.Model):
         primary_key=True)
     grade = db.Column(db.Integer)
 
-
-
-
+    def show(self):
+        return [self.student_id,self.class_id,self.grade]
 
 # 教学表
 class Teach(db.Model):
@@ -73,40 +74,45 @@ class Teach(db.Model):
         nullable=False,
         primary_key=True)
 
+    def show(self):
+        return [self.instructor_id,self.class_id]
 
 # 课程安排表
 class Schedule(db.Model):
     __tablename__ = 'schedules'
+    id = db.Column(db.Integer, primary_key=True)
     class_id = db.Column(
         db.String(64),
         db.ForeignKey('classes.id'),
-        nullable=False,
-        primary_key=True)
+        nullable=False)
     classroom_id = db.Column(
         db.String(32),
         db.ForeignKey('classrooms.id'),
-        nullable=False,
-        primary_key=True)
+        nullable=False)
     week = db.Column(db.Integer, nullable=False)
     day = db.Column(db.Integer, nullable=False)
     section = db.Column(db.Integer, nullable=False)
 
+    def show(self):
+        return [self.id,self.class_id,self.classroom_id,self.week,self.day,self.section]
 
 # 考场安排表
 class Exam_room(db.Model):
     __tablename__ = 'exam_rooms'
+    id = db.Column(db.Integer, primary_key=True)
     exam_id = db.Column(
         db.String(16),
         db.ForeignKey('exams.id'),
         nullable=False,
-        primary_key=True,
         index=True)
     classroom_id = db.Column(
         db.String(32),
         db.ForeignKey('classrooms.id'),
         nullable=False,
-        primary_key=True,
         index=True)
+
+    def show(self):
+        return [self.id,self.exam_id,self.classroom_id]
 
 
 # 考试成绩表
@@ -126,6 +132,8 @@ class Take_exam(db.Model):
         index=True)
     exam_grade = db.Column(db.Integer)
 
+    def show(self):
+        return [self.exam_id,self.student_id,self.exam_grade]
 # 学生表
 
 
@@ -158,10 +166,8 @@ class Student(db.Model, UserMixin, AnonymousUserMixin):
         lazy='dynamic',
         cascade='all, delete-orphan')
 
-    # 学生当前的年级
-    def grade(self):
-        return datetime.now().year - self.year
-
+    def show(self):
+        return [self.id,self.name,self.year]
 
 # 教师表
 class Instructor(db.Model, UserMixin, AnonymousUserMixin):
@@ -175,7 +181,8 @@ class Instructor(db.Model, UserMixin, AnonymousUserMixin):
         lazy='dynamic',
         cascade='all, delete-orphan'
     )
-
+    def show(self):
+        return [self.id,self.name]
 
 # 领导表
 
@@ -184,6 +191,8 @@ class Superior(db.Model, UserMixin, AnonymousUserMixin):
     id = db.Column(db.String(32), primary_key=True, nullable=False, index=True)
     name = db.Column(db.String(32), nullable=False)
 
+    def show(self):
+        return [self.id, self.name]
 
 # 管理员
 class Admin(db.Model, UserMixin, AnonymousUserMixin):
@@ -191,6 +200,8 @@ class Admin(db.Model, UserMixin, AnonymousUserMixin):
     id = db.Column(db.String(32), primary_key=True, nullable=False, index=True)
     name = db.Column(db.String(32), nullable=False)
 
+    def show(self):
+        return [self.id, self.name]
 # 课程表
 
 
@@ -208,6 +219,8 @@ class Course(db.Model):
     period = db.Column(db.Integer, nullable=False)
     classes = db.relationship('Class', backref='course', lazy='dynamic')
 
+    def show(self):
+        return [self.id,self.name,self.type,self.credit,self.period,self.classes]
 
 # 教室
 class Classroom(db.Model):
@@ -235,6 +248,9 @@ class Classroom(db.Model):
         lazy='dynamic',
         cascade='all, delete-orphan')
 
+    def show(self):
+        return [self.id,self.building,self.floor,self.number]
+
 # 教学班表
 
 
@@ -246,20 +262,20 @@ class Class(db.Model):
     course_id = db.Column(db.String(64), db.ForeignKey('courses.id'))
     number = db.Column(db.Integer, nullable=False)
     max_people = db.Column(db.Integer, nullable=False)  # 最大可选人数
-    exam = db.relationship('Exam', backref='class', lazy='dynamic')
-    choose = db.Column(db.Boolean)  # 课程是否可选
+    exam = db.relationship('Exam', backref='classes', lazy='dynamic')
+    optional = db.Column(db.Boolean)  # 课程是否可选
     curricula_class = db.relationship(
         'Curricula_variable',
         foreign_keys=[
             Curricula_variable.class_id],
         backref=db.backref(
-            'class',
+            'classes',
             lazy='joined'),
         lazy='dynamic',
         cascade='all, delete-orphan')
     teach_class = db.relationship('Teach',
                                   foreign_keys=[Teach.class_id],
-                                  backref=db.backref('class', lazy='joined'),
+                                  backref=db.backref('classes', lazy='joined'),
                                   lazy='dynamic',
                                   cascade='all, delete-orphan')
     schedule_class = db.relationship(
@@ -267,17 +283,19 @@ class Class(db.Model):
         foreign_keys=[
             Schedule.class_id],
         backref=db.backref(
-            'class',
+            'classes',
             lazy='joined'),
         lazy='dynamic',
         cascade='all,delete-orphan')
 
+    def show(self):
+        return [self.id,self.year,self.term,self.course_id,self.number,self.max_people,self.optional]
 
 # 考试表
 class Exam(db.Model):
     __tablename__ = 'exams'
     id = db.Column(db.String(16), primary_key=True, index=True)
-    class_id = db.Column(
+    classes_id = db.Column(
         db.String(64),
         db.ForeignKey('classes.id'),
         nullable=False)
@@ -293,3 +311,5 @@ class Exam(db.Model):
                                backref=db.backref('exam', lazy='joined'),
                                lazy='dynamic',
                                cascade='all,delete-orphan')
+    def show(self):
+        return [self.id,self.classes_id,self.date,self.time]
