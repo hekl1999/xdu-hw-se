@@ -29,23 +29,15 @@
     <div class="layui-side-scroll">
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree" lay-filter="test">
-        <li class="layui-nav-item"><a href="" target="content">我的课表</a></li>
+        <li class="layui-nav-item"><a href="content/tea_mine_class.html" target="content">我的课表</a></li>
         <li class="layui-nav-item layui-nav-itemed">
           <a>学生名单</a>
-          <dl class="layui-nav-child">
-            <dd><a href="">班级1</a></dd>
-            <dd><a href="">班级1</a></dd>
-            <dd><a href="">班级1</a></dd>
-            <dd><a href="">班级1</a></dd>
+          <dl id="class_list-student" class="layui-nav-child">
           </dl>
         </li>
         <li class="layui-nav-item">
           <a>成绩录入</a>
-          <dl class="layui-nav-child">
-            <dd><a href="">班级1</a></dd>
-            <dd><a href="">班级1</a></dd>
-            <dd><a href="">班级1</a></dd>
-            <dd><a href="">班级1</a></dd>
+          <dl id="class_list-grade" class="layui-nav-child">
           </dl>
         </li>
         <li class="layui-nav-item"><a href="" target="content">考试安排</a></li>
@@ -55,7 +47,7 @@
 
   <div class="layui-body">
     <!-- 内容主体区域 -->
-    <iframe id="content" name="content" height="99%" width="100%" onload="change_url()"></iframe>
+    <iframe id="content" name="content" height="99%" width="100%"></iframe>
     <!--<div style="padding: 15px;">内容主体区域</div>-->
   </div>
 
@@ -72,10 +64,10 @@
 <!-- JavaScript -->
 <script src="./layui/layui.js"></script>
 <script src="./js/jquery.js"></script>
-<script src="./js/main.js"></script>
 <script src="./js/leader.js"></script>
+<script src="./js/main.js"></script>
 <script>
-  who_am_i();
+  tea_load_classes_list();
 </script>
 </body>
 </html>

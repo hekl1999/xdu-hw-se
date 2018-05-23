@@ -5,9 +5,11 @@ const URLs = {
     who_am_i: Host + '/who_am_i',
     change_passwd: Host + '/change_passwd',
     logout: Host + '/logout',
-    stu_mine_class: Host + '/student/stu_mine_class',
-    stu_mine_grade: Host + '/student/stu_mine_grade',
-    stu_exam_info: Host + '/student/stu_exam_info',
+    stu_mine_class: Host + '/student/mine_class',
+    stu_mine_grade: Host + '/student/mine_grade',
+    stu_exam_info: Host + '/student/exam_info',
+    tea_mine_class: Host + '/teacher/mine_class',
+    tea_class_info: Host + '/teacher/class_info',
 };
 const Actions = {
     login: function() {
@@ -19,21 +21,21 @@ const Actions = {
             url: URLs.login,
             type: 'POST',
             data: post_data,
-            complete: function(jqXHR, textStatus) {
+            complete: function(jqXHR) {
                 if (200 === jqXHR.status) {
                     const data = eval('(' + jqXHR.responseText + ')');
-                    if ('student' === data.type)
+                    if ('student' === data.type.toString())
                         window.location.href = './student.html';
-                    else if ('instructor' === data.type)
+                    else if ('instructor' === data.type.toString())
                         window.location.href = './instructor.html';
-                    else if ('superior' === data.type)
+                    else if ('superior' === data.type.toString())
                         window.location.href = './superior.html';
-                    else if ('admin' === data.type)
+                    else if ('admin' === data.type.toString())
                         window.location.href = './admin.html';
-                    else if ('root' === data.type)
+                    else if ('root' === data.type.toString())
                         window.location.href = './root.html';
                 }
-                else if (400 ===jqXHR.status)
+                else if (400 === jqXHR.status)
                     alert('请求错误！');
                 else if (403 === jqXHR.status)
                     alert('账户或密码错误，请确认后重试！');
@@ -45,15 +47,16 @@ const Actions = {
         });
     },
     who_am_i: function() {
-        let data = {};
         $.ajax({
             url: URLs.who_am_i,
             type: 'GET',
-            complete: function(jqXHR, textStatus) {
-                if (200 === jqXHR.status)
-                    data: ;
+            complete: function(jqXHR) {
+                if (200 === jqXHR.status) {
+                    let data = eval('(' + jqXHR.responseText + ')');
+                    $('#mine-name').text(data['name']);
+                }
                 else
-                    alert('注销失败，请稍后重试！');
+                    alert('获取个人信息失败，请尝试刷新页面！');
             }
         });
     },
@@ -66,7 +69,7 @@ const Actions = {
             url: URLs.change_passwd,
             type: 'POST',
             data: post_data,
-            complete: function(jqXHR, textStatus) {
+            complete: function(jqXHR) {
                 if (200 === jqXHR.status) {
                     alert('密码修改成功，请使用新秘密重新登录！');
                     window.location.href = './login.html';
@@ -88,7 +91,7 @@ const Actions = {
         $.ajax({
             url: URLs.logout,
             type: 'GET',
-            complete: function(jqXHR, textStatus) {
+            complete: function(jqXHR) {
                 if (200 === jqXHR.status)
                     window.location.href = './login.html';
                 else
@@ -102,7 +105,7 @@ const Actions = {
             url: URLs.stu_mine_class,
             type: 'GET',
             async: false,
-            complete: function(jqXHR, textStatus) {
+            complete: function(jqXHR) {
                 if (200 === jqXHR.status) {
                     data = eval('(' + jqXHR.responseText + ')');
                 }
@@ -124,7 +127,7 @@ const Actions = {
             url: URLs.stu_mine_grade,
             type: 'GET',
             async: false,
-            complete: function(jqXHR, textStatus) {
+            complete: function(jqXHR) {
                 if (200 === jqXHR.status) {
                     data = eval('(' + jqXHR.responseText + ')');
                 }
@@ -146,7 +149,7 @@ const Actions = {
             url: URLs.stu_exam_info,
             type: 'GET',
             async: false,
-            complete: function(jqXHR, textStatus) {
+            complete: function(jqXHR) {
                 if (200 === jqXHR.status) {
                     data = eval('(' + jqXHR.responseText + ')');
                 }
@@ -161,7 +164,137 @@ const Actions = {
             }
         });
         return data;
-    }
+    },
+    tea_mine_class: function() {
+        let data = [];
+        $.ajax({
+            url: URLs.tea_mine_class,
+            type: 'GET',
+            async: false,
+            complete: function(jqXHR) {
+                if (200 === jqXHR.status) {
+                    data = eval('(' + jqXHR.responseText + ')');
+                }
+                else if (401 === jqXHR.status) {
+                    alert('您未登录，请登录后重试！');
+                    top.location.href = '../login.html'
+                }
+                else if(404 === jqXHR.status)
+                    data = [];
+                else
+                    alert('未知错误，请稍后重试！');
+            }
+        });
+        return data;
+    },
+    tea_classes_info: function() {
+        let data = [];
+        $.ajax({
+            url: URLs.tea_class_info,
+            type: 'GET',
+            async: false,
+            complete: function(jqXHR) {
+                if (200 === jqXHR.status) {
+                    data = eval('(' + jqXHR.responseText + ')');
+                }
+                else if (401 === jqXHR.status) {
+                    alert('您未登录，请登录后重试！');
+                    top.location.href = '../login.html'
+                }
+                else if(404 === jqXHR.status)
+                    data = [];
+                else
+                    alert('未知错误，请稍后重试！');
+            }
+        });
+        return data;
+    },
+    tea_class_info: function(class_id) {
+        let data = [];
+        $.ajax({
+            url: URLs.tea_class_info,
+            type: 'GET',
+            data: {
+                'class_id': class_id
+            },
+            async: false,
+            complete: function(jqXHR) {
+                if (200 === jqXHR.status) {
+                    data = eval('(' + jqXHR.responseText + ')');
+                }
+                else if (401 === jqXHR.status) {
+                    alert('您未登录，请登录后重试！');
+                    top.location.href = '../login.html'
+                }
+                else if (403 === jqXHR.status)
+                    alert('该课程任课老师不是你，请重新登录后重试！');
+                else if(404 === jqXHR.status)
+                    data = [];
+                else
+                    alert('未知错误，请稍后重试！');
+            }
+        });
+        return data;
+    },
+};
+const Tools = {
+    get_grade_class: function(grade) {
+        if (-1 === grade) {
+            return '';
+        }
+        else if (grade >= 90)  // 优
+            return 'success';
+        else if (grade >= 75)  // 良
+            return 'info';
+        else if (grade >= 60)  // 及格
+            return 'warning';
+        else
+            return 'danger';
+    },
+    get_course_type: function(class_type) {
+        switch (class_type) {
+            case 1:
+                return '必修';
+            case 2:
+                return '校任选课';
+            case 3:
+                return '人文类选修课';
+            case 4:
+                return '学院任选课';
+        }
+    },
+    get_weekday: function(day) {
+        switch (day) {
+            case 0:
+                return '周日';
+            case 1:
+                return '周一';
+            case 2:
+                return '周二';
+            case 3:
+                return '周三';
+            case 4:
+                return '周四';
+            case 5:
+                return '周五';
+            case 6:
+                return '周六';
+        }
+    },
+    get_section: function(section) {
+        switch (section) {
+            case 1:
+                return '1-2节';
+            case 2:
+                return '3-4节';
+            case 3:
+                return '5-6节';
+            case 4:
+                return '7-8节';
+            case 5:
+                return '9-10节';
+        }
+    },
 };
 
 function login() {
@@ -178,11 +311,9 @@ function login() {
     account_input.val('');
     passwd_input.val('')
 }
-
 function who_am_i() {
-
+    Actions.who_am_i();
 }
-
 function change_passwd() {
     const o_passwd_input = $('#old-passwd-input');
     const n_passwd_input = $('#new-passwd-input');
@@ -203,58 +334,17 @@ function change_passwd() {
     n_passwd_input.val('');
     rn_passwd_input.val('');
 }
-
 function logout() {
     Actions.logout();
 }
 
-
-
 function stu_mine_class() {
     let mine_classes = Actions.stu_mine_class();
     for (let i in mine_classes) {
-        switch (mine_classes[i].day) {
-            case 0:
-                mine_classes[i].day = '周日';
-                break;
-            case 1:
-                mine_classes[i].day = '周一';
-                break;
-            case 2:
-                mine_classes[i].day = '周二';
-                break;
-            case 3:
-                mine_classes[i].day = '周三';
-                break;
-            case 4:
-                mine_classes[i].day = '周四';
-                break;
-            case 5:
-                mine_classes[i].day = '周五';
-                break;
-            case 6:
-                mine_classes[i].day = '周六';
-                break;
-        }
-        switch (mine_classes[i].section) {
-            case 1:
-                mine_classes[i].section = '1-2节';
-                break;
-            case 2:
-                mine_classes[i].section = '3-4节';
-                break;
-            case 3:
-                mine_classes[i].section = '5-6节';
-                break;
-            case 4:
-                mine_classes[i].section = '7-8节';
-                break;
-            case 5:
-                mine_classes[i].section = '9-10节';
-                break;
-        }
+        mine_classes[i].day = Tools.get_weekday(mine_classes[i].day);
+        mine_classes[i].section = Tools.get_section(mine_classes[i].section);
     }
-    let mine_class_table = new Vue({
+    new Vue({
         el: '#mine_class-table',
         data: {
             mine_classes: mine_classes
@@ -262,39 +352,15 @@ function stu_mine_class() {
     });
     $('#mine_class-table tbody').show();
 }
-
 function stu_mine_grade() {
     let mine_grade = Actions.stu_mine_grade();
     for (let i in mine_grade) {
-        if (-1 === mine_grade[i].grade) {
+        mine_grade[i].grade_class = Tools.get_grade_class(mine_grade[i].grade);
+        mine_grade[i].type = Tools.get_course_type(mine_grade[i].type);
+        if (-1 === mine_grade[i].grade)
             mine_grade[i].grade = '未录入';
-            mine_grade[i].grade_class = '';
-        }
-        else if (mine_grade[i].grade >= 90)  // 优
-            mine_grade[i].grade_class = 'success';
-        else if (mine_grade[i].grade >= 75)  // 良
-            mine_grade[i].grade_class = 'info';
-        else if (mine_grade[i].grade >= 60)  // 及格
-            mine_grade[i].grade_class = 'warning';
-        else
-            mine_grade[i].grade_class = 'danger';
-
-        switch (mine_grade[i].type) {
-            case 1:
-                mine_grade[i].type = '必修';
-                break;
-            case 2:
-                mine_grade[i].type = '校任选课';
-                break;
-            case 3:
-                mine_grade[i].type = '人文类选修课';
-                break;
-            case 4:
-                mine_grade[i].type = '学院任选课';
-                break;
-        }
     }
-    let mine_grade_table = new Vue({
+    new Vue({
         el: '#mine_grade-table',
         data: {
             mine_grades: mine_grade
@@ -302,28 +368,124 @@ function stu_mine_grade() {
     });
     $('#mine_grade-table tbody').show();
 }
-
 function stu_exam_info() {
     let exam_info = Actions.stu_exam_info();
     for (let i in exam_info) {
-        if (-1 === exam_info[i].exam_grade) {
+        exam_info[i].exam_grade_class = Tools.get_grade_class(exam_info[i].exam_grade);
+        if (-1 === exam_info[i].exam_grade)
             exam_info[i].exam_grade = '未录入';
-            exam_info[i].exam_grade_class = '';
-        }
-        else if (exam_info[i].exam_grade >= 90)  // 优
-            exam_info[i].grade_class = 'success';
-        else if (exam_info[i].exam_grade >= 75)  // 良
-            exam_info[i].grade_class = 'info';
-        else if (exam_info[i].exam_grade >= 60)  // 及格
-            exam_info[i].grade_class = 'warning';
-        else
-            exam_info[i].grade_class = 'danger';
     }
-    let exam_table = new Vue({
+    new Vue({
         el: '#exam_info-table',
         data: {
             exams: exam_info
         }
     });
     $('#exam_info-table tbody').show();
+}
+
+function tea_mine_class() {
+    let data = Actions.tea_mine_class();
+    for (let i in data) {
+        data[i].day = Tools.get_weekday(data[i].day);
+        data[i].section = Tools.get_section(data[i].section);
+    }
+    new Vue({
+        el: '#mine_class-table',
+        data: {
+            mine_classes: data
+        }
+    });
+    $('#mine_class-table tbody').show();
+
+}
+function tea_load_classes_list() {
+    let data = Actions.tea_classes_info();
+    let course_count = {};
+    for (let i in data) {
+        if (!course_count[data[i]['course_name']]) {
+            course_count[data[i]['course_name']] = 1;
+            data[i]['course_name'] += '_1';
+        }
+        else {
+            course_count[data[i]['course_name']] += 1;
+            data[i]['course_name'] += '_' + course_count[data[i]['course_name']].toString();
+        }
+        $('#class_list-student').append('<dd><a href="./content/tea_students_list.html?class_id=' + data[i]['class_id'] + '" target="content">' + data[i]['course_name'] + '</a></dd>');
+        $('#class_list-grade').append('<dd><a href="">' + data[i]['course_name'] + '</a></dd>');
+    }
+}
+function tea_class_info() {
+    let data = Actions.tea_classes_info();
+    const class_id = get_url_param('class_id');
+    let class_info = new Vue({
+        el: '#class_info-table',
+        data: {
+            class_id: '',
+            course_id: '',
+            course_name: '',
+            type: '',
+            classroom_id: '',
+            time: ''
+        }
+    });
+    for (let i in data) {
+        if (class_id === data[i]['class_id']) {
+            class_info.$data.class_id = data[i]['class_id'];
+            class_info.$data.course_id = data[i]['course_id'];
+            class_info.$data.course_name = data[i]['course_name'];
+            class_info.$data.type = Tools.get_course_type(data[i]['type']);
+            class_info.$data.classroom_id = data[i]['classroom_id'];
+            class_info.$data.time = data[i]['time'];
+            break;
+        }
+    }
+    $('#class_info-table tbody').show();
+}
+function tea_students_list() {
+    const class_id = get_url_param('class_id');
+    let data = Actions.tea_class_info(class_id);
+    for (let i in data) {
+        data[i].grade_class = Tools.get_grade_class(data[i].grade);
+        if (-1 === data[i].grade)
+            data[i].grade = '未录入';
+    }
+    new Vue({
+        el: '#students_list-table',
+        data: {
+            students: data
+        }
+    });
+    $('#students_list-table tbody').show()
+}
+
+// Tools
+function change_url() {
+    let frame_url = window.frames[0].window.location.href;
+    setCookie('frame_url', frame_url, 1);
+}
+function setCookie(c_name, value, expire_days) {
+    let ex_date = new Date();
+    ex_date.setDate(ex_date.getDate() + expire_days);
+    document.cookie = c_name + "=" + encodeURI(value) + ((expire_days==null) ? "" : ";expires=" + ex_date.toUTCString());
+}
+function getCookie(c_name) {
+    if (document.cookie.length > 0) {
+        let c_start = document.cookie.indexOf(c_name + "=");
+        if (c_start !== -1) {
+            c_start = c_start + c_name.length + 1;
+            let c_end = document.cookie.indexOf(";", c_start);
+            if (c_end === -1)
+                c_end = document.cookie.length;
+            return unescape(document.cookie.substring(c_start, c_end));
+        }
+    }
+    return "";
+}
+function get_url_param(key) {
+    let reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    let r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null)
+        return unescape(r[2]);
+    return null; //返回参数值
 }
