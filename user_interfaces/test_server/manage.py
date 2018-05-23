@@ -31,19 +31,145 @@ def teardown_request(exception):
 def hello():
     return 'Hello World!'
 
+@app.route('/logout')
+def logout():
+    return '', 200
 
-@app.route('/login')
+
+@app.route('/login', methods=['POST'])
 def login():
     account = request.form.get('account')
-    passwd = request.form.get('passwd')
-    print(account, passwd)
+    passwd = request.form.get('password')
     if account == passwd:
         if account in ('instructor', 'student', 'admin', 'root'):
-            return account, 200
+            data = {'type': account}
+            return json.dumps(data), 200
         else:
             return 'no_one', 404
     else:
         return 'passwd_wrong', 403
+
+@app.route('/who_am_i')
+def who_am_i():
+    data = {'type': 'student', 'name': 'hhh'};
+    return json.dumps(data), 200
+
+@app.route('/change_passwd', methods=['POST'])
+def change_passwd():
+    o_passwd = request.form.get('old_password')
+    n_passwd = request.form.get('new_password')
+    if not o_passwd or not n_passwd:
+        return 'bad', 400
+    else:
+        return '', 401
+
+@app.route('/student/stu_mine_grade')
+def stu_mine_grade():
+    data = [{
+        'course_id': 'SE3002L-02',
+        'name': '信号与系统',
+        'type': 4,
+        'credit': 2,
+        'grade': 70
+    }, {
+        'course_id': 'SE5003L-02',
+        'name': '数据库系统',
+        'type': 1,
+        'credit': 2,
+        'grade': -1
+    }, {
+        'course_id': 'SE2007L-02',
+        'name': '面向对象程序设计',
+        'type': 1,
+        'credit': 2,
+        'grade': 89
+    }, {
+        'course_id': 'SE3003L-02',
+        'name': '数字电路与系统设计',
+        'type': 1,
+        'credit': 1,
+        'grade': 100
+    }, ]
+    return json.dumps(data), 200
+
+@app.route('/student/stu_mine_class')
+def stu_mine_class():
+    data = [{
+        'course_id': 'SE3002L-02',
+        'course_name': '信号与系统',
+        'instructor_name': ['张玲霞（副教授）', ],
+        'classroom_id': 'A-325',
+        'week': 1,
+        'day': 1,
+        'section': 1
+    }, {
+        'course_id': 'SE5003L-02',
+        'course_name': '数据库系统',
+        'instructor_name': ['刘伟（副教授）', ],
+        'classroom_id': 'B-106',
+        'week': 1,
+        'day': 1,
+        'section': 2
+    }, {
+        'course_id': 'SE2007L-02',
+        'course_name': '面向对象程序设计',
+        'instructor_name': ['王献青（副教授）', '韦统义（副教授）', ],
+        'classroom_id': 'A-314',
+        'week': 1,
+        'day': 1,
+        'section': 3
+    }, {
+        'course_id': 'SE3003L-02',
+        'course_name': '数字电路与系统设计',
+        'instructor_name': ['张亮（副教授）', ],
+        'classroom_id': 'B-419',
+        'week': 1,
+        'day': 2,
+        'section': 1
+    }, ]
+    return json.dumps(data), 200
+
+@app.route('/student/stu_exam_info')
+def stu_exam_info():
+    data = [{
+        'course_name': '数字电路与系统设计',
+        'classroom_id': 'A-311',
+        'date': '2018-03-23',
+        'time': '20:00:00',
+        'exam_grade': 20
+    }, {
+        'course_name': '数字电路与系统设计',
+        'classroom_id': 'A-311',
+        'date': '2018-03-23',
+        'time': '20:00:00',
+        'exam_grade': 80
+    }, {
+        'course_name': '数字电路与系统设计',
+        'classroom_id': 'A-311',
+        'date': '2018-03-23',
+        'time': '20:00:00',
+        'exam_grade': 90
+    }, {
+        'course_name': '数字电路与系统设计',
+        'classroom_id': 'A-311',
+        'date': '2018-03-23',
+        'time': '20:00:00',
+        'exam_grade': -1
+    }, ]
+    return json.dumps(data), 200
+
+
+@app.route('/teacher/tea_class_info')
+def tea_class_info():
+    data = [{
+        'class_id': 'SE3002L-02',
+        'course_id': 'SE3002L',
+        'course_name': '信号与系统',
+        'type': 4,
+        'classroom_id': 'A-325',
+        'day': ['', ''],
+    },]
+    return json.dumps(data), 200
 
 
 if __name__ == '__main__':

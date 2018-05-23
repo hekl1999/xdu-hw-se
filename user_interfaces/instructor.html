@@ -14,14 +14,14 @@
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
-        <a>
-          罗阳豪
+        <a id="mine-name">
+
         </a>
         <dl class="layui-nav-child">
-          <dd><a href="">重置密码</a></dd>
+          <dd><a href="./change_passwd.html">重置密码</a></dd>
         </dl>
       </li>
-      <li class="layui-nav-item"><a href="">注销</a></li>
+      <li class="layui-nav-item"><a href="#" onclick="logout()">注销</a></li>
     </ul>
   </div>
 
@@ -73,5 +73,9 @@
 <script src="./layui/layui.js"></script>
 <script src="./js/jquery.js"></script>
 <script src="./js/main.js"></script>
+<script src="./js/leader.js"></script>
+<script>
+  who_am_i();
+</script>
 </body>
 </html>

@@ -2,12 +2,11 @@
 const Host = 'http://127.0.0.1:8080';
 const URLs = {
     login: Host + '/login',
-    who_am_i: Host + '/who_am_i',
-    change_passwd: Host + '/change_passwd',
     logout: Host + '/logout',
+    change_passwd: Host + '/change_passwd',
     stu_mine_class: Host + '/student/stu_mine_class',
-    stu_mine_grade: Host + '/student/stu_mine_grade',
-    stu_exam_info: Host + '/student/stu_exam_info',
+    stu_mine_grade: Host + '/stu_mine_grade',
+    stu_class_list: Host + '/student/stu_class_list'
 };
 const Actions = {
     login: function() {
@@ -44,14 +43,13 @@ const Actions = {
             }
         });
     },
-    who_am_i: function() {
-        let data = {};
+    logout: function() {
         $.ajax({
-            url: URLs.who_am_i,
+            url: URLs.logout,
             type: 'GET',
             complete: function(jqXHR, textStatus) {
                 if (200 === jqXHR.status)
-                    data: ;
+                    window.location.href = './login.html';
                 else
                     alert('注销失败，请稍后重试！');
             }
@@ -81,18 +79,6 @@ const Actions = {
                     alert('账号不存在，请确认后重试！');
                 else
                     alert('未知错误，请稍后重试！');
-            }
-        });
-    },
-    logout: function() {
-        $.ajax({
-            url: URLs.logout,
-            type: 'GET',
-            complete: function(jqXHR, textStatus) {
-                if (200 === jqXHR.status)
-                    window.location.href = './login.html';
-                else
-                    alert('注销失败，请稍后重试！');
             }
         });
     },
@@ -140,28 +126,6 @@ const Actions = {
         });
         return data;
     },
-    stu_exam_info: function() {
-        let data = [];
-        $.ajax({
-            url: URLs.stu_exam_info,
-            type: 'GET',
-            async: false,
-            complete: function(jqXHR, textStatus) {
-                if (200 === jqXHR.status) {
-                    data = eval('(' + jqXHR.responseText + ')');
-                }
-                else if (401 === jqXHR.status) {
-                    alert('您未登录，请登录后重试！');
-                    top.location.href = '../login.html'
-                }
-                else if(404 === jqXHR.status)
-                    data = [];
-                else
-                    alert('未知错误，请稍后重试！');
-            }
-        });
-        return data;
-    }
 };
 
 function login() {
@@ -179,8 +143,8 @@ function login() {
     passwd_input.val('')
 }
 
-function who_am_i() {
-
+function logout() {
+    Actions.logout();
 }
 
 function change_passwd() {
@@ -203,12 +167,6 @@ function change_passwd() {
     n_passwd_input.val('');
     rn_passwd_input.val('');
 }
-
-function logout() {
-    Actions.logout();
-}
-
-
 
 function stu_mine_class() {
     let mine_classes = Actions.stu_mine_class();
@@ -301,29 +259,4 @@ function stu_mine_grade() {
         }
     });
     $('#mine_grade-table tbody').show();
-}
-
-function stu_exam_info() {
-    let exam_info = Actions.stu_exam_info();
-    for (let i in exam_info) {
-        if (-1 === exam_info[i].exam_grade) {
-            exam_info[i].exam_grade = '未录入';
-            exam_info[i].exam_grade_class = '';
-        }
-        else if (exam_info[i].exam_grade >= 90)  // 优
-            exam_info[i].grade_class = 'success';
-        else if (exam_info[i].exam_grade >= 75)  // 良
-            exam_info[i].grade_class = 'info';
-        else if (exam_info[i].exam_grade >= 60)  // 及格
-            exam_info[i].grade_class = 'warning';
-        else
-            exam_info[i].grade_class = 'danger';
-    }
-    let exam_table = new Vue({
-        el: '#exam_info-table',
-        data: {
-            exams: exam_info
-        }
-    });
-    $('#exam_info-table tbody').show();
 }
