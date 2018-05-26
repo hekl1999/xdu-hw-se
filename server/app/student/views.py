@@ -135,3 +135,8 @@ def exam_info():
             if exam['course_name'] is not None:
                 result.append(exam)
     return jsonify(result)
+
+
+@student.route('/test_blueprint')
+def student_test():
+    return 'hello world'
