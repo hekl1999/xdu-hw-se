@@ -4,6 +4,7 @@ from flask_migrate import Migrate, MigrateCommand
 # from app.models import User, Picture,Role
 from app.main import InsertData
 
+
 app = create_app('testing')
 manager = Manager(app)
 migrate = Migrate(app, db)
