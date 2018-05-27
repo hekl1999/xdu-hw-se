@@ -52,11 +52,10 @@ def tea_class():
         return jsonify(result)
 
 
-@teacher.route('/class_people')
+@teacher.route('/class_people', methods=['POST'])
 @login_required
 def class_info():
-    print(request.data)
-    class_id= json.loads(request.data).get('class_id')
+    class_id= request.form.get('class_id')
     if class_id is None:
         return jsonify({'message':'no data'}), 401
     teas = Teach.query.filter_by(class_id=class_id).all()
@@ -111,7 +110,7 @@ def exam_info():
         result = []
         for my_teach in my_teaches:
             # 一门课可以安排多个时间考试
-            exam_infos = Exam.query.filter_by(class_id=my_teach.class_id).all()
+            exam_infos = Exam.query.filter_by(classes_id=my_teach.class_id).all()
             for exam in exam_infos:
                 re = {'date': exam.date,
                       'time': exam.time,
