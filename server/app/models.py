@@ -3,6 +3,7 @@ from flask_login import UserMixin, AnonymousUserMixin
 from flask import current_app
 from datetime import datetime
 
+
 # 账户表
 class Account(UserMixin, AnonymousUserMixin, db.Model):
     __tablename__ = 'accounts'
@@ -16,20 +17,20 @@ class Account(UserMixin, AnonymousUserMixin, db.Model):
     type = db.Column(db.String(16), nullable=False)
 
     def show(self):
-        return [self.account,self.password,self.type]
+        return [self.account, self.password, self.type]
 
 
 @login_manager.user_loader
 def load_user(account):
     account = Account.query.get(int(account))
     if account.type == 'student':
-        return Student.query.get(int(account))
+        return Student.query.get(int(account.account))
     elif account.type == 'instructor':
-        return Instructor.query.get(int(account))
+        return Instructor.query.get(int(account.account))
     elif account.type == 'leader':
-        return Superior.query.get(int(account))
+        return Superior.query.get(int(account.account))
     elif account.type == 'Admin':
-        return Admin.query.get(int(account))
+        return Admin.query.get(int(account.account))
     elif account in app.config['FLASKY_ADMIN']:
         return account
 
@@ -42,7 +43,7 @@ class AnonymousUser(AnonymousUserMixin):
         return False
 
 
-# 学生选课的表
+# 学生选课的表,类名将近用，回头改
 class Curricula_variable(db.Model):
     __tablename__ = 'curricula_variables'
     student_id = db.Column(
@@ -58,7 +59,8 @@ class Curricula_variable(db.Model):
     grade = db.Column(db.Integer)
 
     def show(self):
-        return [self.student_id,self.class_id,self.grade]
+        return [self.student_id, self.class_id, self.grade]
+
 
 # 教学表
 class Teach(db.Model):
@@ -75,7 +77,8 @@ class Teach(db.Model):
         primary_key=True)
 
     def show(self):
-        return [self.instructor_id,self.class_id]
+        return [self.instructor_id, self.class_id]
+
 
 # 课程安排表
 class Schedule(db.Model):
@@ -94,7 +97,8 @@ class Schedule(db.Model):
     section = db.Column(db.Integer, nullable=False)
 
     def show(self):
-        return [self.id,self.class_id,self.classroom_id,self.week,self.day,self.section]
+        return [self.id, self.class_id, self.classroom_id, self.week, self.day, self.section]
+
 
 # 考场安排表
 class Exam_room(db.Model):
@@ -112,7 +116,7 @@ class Exam_room(db.Model):
         index=True)
 
     def show(self):
-        return [self.id,self.exam_id,self.classroom_id]
+        return [self.id, self.exam_id, self.classroom_id]
 
 
 # 考试成绩表
@@ -133,7 +137,9 @@ class Take_exam(db.Model):
     exam_grade = db.Column(db.Integer)
 
     def show(self):
-        return [self.exam_id,self.student_id,self.exam_grade]
+        return [self.exam_id, self.student_id, self.exam_grade]
+
+
 # 学生表
 
 
@@ -167,7 +173,8 @@ class Student(db.Model, UserMixin, AnonymousUserMixin):
         cascade='all, delete-orphan')
 
     def show(self):
-        return [self.id,self.name,self.year]
+        return [self.id, self.name, self.year]
+
 
 # 教师表
 class Instructor(db.Model, UserMixin, AnonymousUserMixin):
@@ -181,8 +188,10 @@ class Instructor(db.Model, UserMixin, AnonymousUserMixin):
         lazy='dynamic',
         cascade='all, delete-orphan'
     )
+
     def show(self):
-        return [self.id,self.name]
+        return [self.id, self.name]
+
 
 # 领导表
 
@@ -194,6 +203,7 @@ class Superior(db.Model, UserMixin, AnonymousUserMixin):
     def show(self):
         return [self.id, self.name]
 
+
 # 管理员
 class Admin(db.Model, UserMixin, AnonymousUserMixin):
     __tablename__ = 'admins'
@@ -202,6 +212,8 @@ class Admin(db.Model, UserMixin, AnonymousUserMixin):
 
     def show(self):
         return [self.id, self.name]
+
+
 # 课程表
 
 
@@ -220,7 +232,8 @@ class Course(db.Model):
     classes = db.relationship('Class', backref='course', lazy='dynamic')
 
     def show(self):
-        return [self.id,self.name,self.type,self.credit,self.period,self.classes]
+        return [self.id, self.name, self.type, self.credit, self.period, self.classes]
+
 
 # 教室
 class Classroom(db.Model):
@@ -249,7 +262,8 @@ class Classroom(db.Model):
         cascade='all, delete-orphan')
 
     def show(self):
-        return [self.id,self.building,self.floor,self.number]
+        return [self.id, self.building, self.floor, self.number]
+
 
 # 教学班表
 
@@ -289,7 +303,8 @@ class Class(db.Model):
         cascade='all,delete-orphan')
 
     def show(self):
-        return [self.id,self.year,self.term,self.course_id,self.number,self.max_people,self.optional]
+        return [self.id, self.year, self.term, self.course_id, self.number, self.max_people, self.optional]
+
 
 # 考试表
 class Exam(db.Model):
@@ -300,7 +315,7 @@ class Exam(db.Model):
         db.ForeignKey('classes.id'),
         nullable=False)
     date = db.Column(db.String(64), nullable=False)  # 日期 格式为 年/月/日
-    time = db.Column(db.String(64), nullable=False)   # 时间 格式为24小时制 hour:minute
+    time = db.Column(db.String(64), nullable=False)  # 时间 格式为24小时制 hour:minute
     exam_room = db.relationship('Exam_room',
                                 foreign_keys=[Exam_room.exam_id],
                                 backref=db.backref('exam', lazy='joined'),
@@ -311,5 +326,6 @@ class Exam(db.Model):
                                backref=db.backref('exam', lazy='joined'),
                                lazy='dynamic',
                                cascade='all,delete-orphan')
+
     def show(self):
-        return [self.id,self.classes_id,self.date,self.time]
+        return [self.id, self.classes_id, self.date, self.time]

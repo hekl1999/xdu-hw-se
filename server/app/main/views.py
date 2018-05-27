@@ -3,8 +3,14 @@ from flask import request, current_app, jsonify, make_response
 from ..models import Account, Student, Instructor, Superior, Admin
 from flask_login import login_user, logout_user, current_user, login_required
 from . import main
+import json
 
 login_manager.login_view = 'main.no_login'
+
+
+@main.route('/hello')
+def hello():
+    return 'hello world'
 
 
 @main.route('/no_login')
@@ -14,28 +20,28 @@ def no_login():
 
 @main.route('/login', methods=['POST'])
 def login():
-    data = request.form
+    data = json.loads(request.data)
     account = data.get('account')
     password = data.get('password')
-    remember_me = data.get('remember_me')
+    remember_me = True
     if account is None or password is None or remember_me is None:
         return jsonify({'message': 'data missing'}), 400
-    user = Account.query.filter(account=account).first()
+    user = Account.query.filter_by(account=account).first()
     if user is not None:
         if user.password == password:
-            if user.type == 'Student':
+            if user.type == 'student':
                 s = Student.query.filter_by(id=account).first()
                 login_user(s, remember_me)
                 return jsonify({'type': 'student'})
-            if user.type == 'Instructor':
+            if user.type == 'instructor':
                 i = Instructor.query.filter_by(id=account).first()
                 login_user(i, remember=remember_me)
                 return jsonify({'type': 'instructor'})
-            if user.type == 'Superior':
+            if user.type == 'superior':
                 S = Superior.query.filter_by(id=account).first()
                 login_user(S, remember=remember_me)
                 return jsonify({'type': 'superior'})
-            if user.type == 'Admin':
+            if user.type == 'admin':
                 a = Admin.query.filter_by(id=account).first()
                 login_user(a,remember_me)
                 return jsonify({'type': 'admin'})

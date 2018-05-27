@@ -103,7 +103,7 @@ def insert_into_Curricula_variable(data_list):
         if stu is not None and cla is not None:
             if grade is None:
                 grade = 0
-            c_v = Curricula_variable(student=stu,classes=cla,grade=grade)
+            c_v = CurriculaVariable(student=stu, classes=cla, grade=grade)
             db.session.add(c_v)
     db.session.commit()
 

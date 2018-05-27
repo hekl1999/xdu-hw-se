@@ -6,8 +6,31 @@ from . import teacher
 import json
 
 
-@teacher.route('/tea_class_info')
-# @login_required
+@teacher.route('/mine_class')
+@login_required
+def mine_class():
+    mine_teachs = Teach.query.filter_by(instructor_id=current_user.id).all()
+    if len(mine_teachs) == 0:
+        return jsonify({'message':'no class'}), 404
+    result = []
+    for mine_cla in mine_teachs:
+        class_id = mine_class.class_id
+        re = {'class_id':class_id,
+              'course_id':mine_cla.classes.course.id,
+              'course_name':mine_cla.classes.course.name}
+        sch = Schedule.query.filter_by(class_id=class_id).first()
+        if sch is None:
+            return jsonify({'message':'data missing'}), 404
+        re['classroom_id'] = sch.classroom_id
+        re['day'] = sch.day
+        re['week'] = sch.week
+        re['section'] = sch.section
+        result.append(re)
+    return jsonify(result)
+
+
+@teacher.route('/class_info')
+@login_required
 def tea_class():
     tea_infos = Teach.query.all()
     print(tea_infos)
@@ -21,13 +44,14 @@ def tea_class():
                   'course_name': tea_info.classes.course.name,
                   'type': tea_info.classes.course.type}
             schs = Schedule.query.filter_by(class_id=tea_info.classes.id).all()
-            re_day = [s.day for s in schs]
-            re['day'] = re_day
+            re_time = [{'day': s.day, 'section': s.section} for s in schs]
+            re['time'] = re_time
             result.append(re)
         print(result)
         return jsonify(result)
 
-@teacher.route('/tea_class')
+
+@teacher.route('/class_people')
 @login_required
 def class_info():
     print(request.data)
@@ -35,9 +59,9 @@ def class_info():
     if class_id is None:
         return jsonify({'message':'no data'}), 401
     teas = Teach.query.filter_by(class_id=class_id).all()
-    # if current_user.id  not in [teach.teacher.id for teach in teas]:
-    #     return jsonify({'message':'you are not this class teacher'}), 403
-    student_infos = Curricula_variable.query.filter_by(class_id= class_id).all()
+    if current_user.id not in [tea.teacher.id for tea in teas]:
+        return jsonify({'message':'you are not its teacher'}), 403
+    student_infos = CurriculaVariable.query.filter_by(class_id= class_id).all()
     result = []
     for student_info in student_infos:
         re = {'student_id':student_info.student.id,
@@ -47,7 +71,7 @@ def class_info():
     return jsonify(result)
 
 
-@teacher.route('/tea_insert_grade',methods=['PUT','POST'])
+@teacher.route('/insert_grade', methods=['PUT', 'POST'])
 @login_required
 def insert_grade():
     data = json.loads(request.data)
@@ -60,13 +84,13 @@ def insert_grade():
     class_info = Class.query.filter_by(id=class_id).first()
     if class_info is None:
         return jsonify({'message': 'no class'}), 404
-    if Teach.query.filter_by(class_id=class_id,instructor_id=current_user.id).first() is None:
+    if Teach.query.filter_by(class_id=class_id, instructor_id=current_user.id).first() is None:
         return jsonify({'message': 'not teach this class'}), 403
-    all_students = Curricula_variable.query.filter_by(class_id=class_id).all()
+    all_students = CurriculaVariable.query.filter_by(class_id=class_id).all()
     for grade_data in input_grades:
         bad_data = []
         try:
-            student = Curricula_variable.query.filter_by(student_id=grade_data.get('student_id')).first()
+            student = CurriculaVariable.query.filter_by(student_id=grade_data.get('student_id')).first()
             if student is None or student not in all_students:
                 bad_data.append(grade_data.get('student_id'))
             else:
