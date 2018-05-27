@@ -16,7 +16,7 @@ def create_app(config_name):
     db.init_app(app)
     login_manager.init_app(app)
 
-    CORS(app)
+    CORS(app, supports_credentials=True)
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)

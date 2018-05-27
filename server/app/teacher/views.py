@@ -78,7 +78,7 @@ def class_info():
 @teacher.route('/insert_grade', methods=['PUT', 'POST'])
 @login_required
 def insert_grade():
-    data = json.loads(request.data)
+    data = request.get_json()
     class_id = data.get('class_id')
     if class_id is None:
         return jsonify({'message': 'no class_id'}), 403
