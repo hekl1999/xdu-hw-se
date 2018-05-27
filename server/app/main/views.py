@@ -8,7 +8,7 @@ import json
 login_manager.login_view = 'main.no_login'
 
 
-@main.route('/hello')
+@main.route('/')
 def hello():
     return 'hello world'
 

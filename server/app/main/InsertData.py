@@ -95,7 +95,7 @@ def insert_into_exam(data_list):
     db.session.commit()
 
 
-def insert_into_Curricula_variable(data_list):
+def insert_into_CurriculaVariable(data_list):
     for data in data_list:
         stu = Student.query.filter_by(id=data['student_id']).first()
         cla = Class.query.filter_by(id=data['class_id']).first()
@@ -161,7 +161,7 @@ insert_list = {'account': insert_into_account,
                'classroom': insert_into_classroom,
                'class': insert_into_class,
                'exam': insert_into_exam,
-                'curricula_variable':insert_into_Curricula_variable,
+                'curricula_variable':insert_into_CurriculaVariable,
                 'teach':insert_into_Teach,
                 'schedule':insert_into_Schedule,
                 'exam_room':insert_into_Exam_room,

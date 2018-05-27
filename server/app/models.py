@@ -44,7 +44,7 @@ class AnonymousUser(AnonymousUserMixin):
 
 
 # 学生选课的表,类名将近用，回头改
-class Curricula_variable(db.Model):
+class CurriculaVariable(db.Model):
     __tablename__ = 'curricula_variables'
     student_id = db.Column(
         db.String(32),
@@ -154,9 +154,9 @@ class Student(db.Model, UserMixin, AnonymousUserMixin):
     name = db.Column(db.String(32), nullable=False)
     year = db.Column(db.Integer, nullable=False)
     curricula_student = db.relationship(
-        'Curricula_variable',
+        'CurriculaVariable',
         foreign_keys=[
-            Curricula_variable.student_id],
+            CurriculaVariable.student_id],
         backref=db.backref(
             'student',
             lazy='joined'),
@@ -279,9 +279,9 @@ class Class(db.Model):
     exam = db.relationship('Exam', backref='classes', lazy='dynamic')
     optional = db.Column(db.Boolean)  # 课程是否可选
     curricula_class = db.relationship(
-        'Curricula_variable',
+        'CurriculaVariable',
         foreign_keys=[
-            Curricula_variable.class_id],
+            CurriculaVariable.class_id],
         backref=db.backref(
             'classes',
             lazy='joined'),

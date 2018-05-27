@@ -21,7 +21,7 @@ def root_get_table():
     # table_name to models
     table_name_models = {
         'accounts': Account,
-        'curricula_variables':CurriculaVariable,
+        'curriculaVariables':CurriculaVariable,
         'teaches':Teach,
         'schedules':Schedule,
         'exam_rooms':Exam_room,
