@@ -1,4 +1,4 @@
-from flask import current_app, request, jsonify
+from flask import current_app, request, jsonify, session
 from ..models import *
 from flask_login import current_user, login_required
 from .. import app, db
@@ -34,6 +34,10 @@ def mine_class():
 @login_required
 def tea_class():
     tea_infos = Teach.query.all()
+    print('cookies:')
+    print(request.cookies)
+    # print('cookies:')
+    print(session)
     print(tea_infos)
     if len(tea_infos) == 0:
         return jsonify({'message': 'no class'}), 404
