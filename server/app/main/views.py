@@ -20,7 +20,7 @@ def no_login():
 
 @main.route('/login', methods=['POST'])
 def login():
-    data = json.loads(request.data)
+    data = request.form
     account = data.get('account')
     password = data.get('password')
     remember_me = True
