@@ -192,6 +192,9 @@ const Actions = {
         });
         return data;
     },
+    stu_classes_list: function() {
+
+    },
 
     tea_mine_class: function() {
         let data = [];
@@ -521,7 +524,8 @@ function stu_mine_grade() {
     });
     $('#mine_grade-table tbody').show();
 }
-function stu_course_selection() {
+function stu_classes_list() {
+    let data = Actions.stu_classes_list();
 
 }
 function stu_exam_info() {

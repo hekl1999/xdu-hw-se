@@ -167,31 +167,25 @@ def stu_exam_info():
 
 @app.route('/student/classes_list')
 def stu_classes_list():
-    data = [{
-        'course_name': '数字电路与系统设计',
-        'classroom_id': 'A-311',
-        'date': '2018-03-23',
-        'time': '20:00:00',
-        'exam_grade': 20
-    }, {
-        'course_name': '数字电路与系统设计',
-        'classroom_id': 'A-311',
-        'date': '2018-03-23',
-        'time': '20:00:00',
-        'exam_grade': 80
-    }, {
-        'course_name': '数字电路与系统设计',
-        'classroom_id': 'A-311',
-        'date': '2018-03-23',
-        'time': '20:00:00',
-        'exam_grade': 90
-    }, {
-        'course_name': '数字电路与系统设计',
-        'classroom_id': 'A-311',
-        'date': '2018-03-23',
-        'time': '20:00:00',
-        'exam_grade': -1
-    }, ]
+    data = [
+        {
+            'course_info': {
+                'course_id': 'SE3002L',
+                'course_name': '信号与系统',
+                'type': '4',  # 课程属性
+                'credit': '2',
+                'period': '32',
+            },
+            'class_id': 'SE3002L-02',
+            'last_people': '21',  # 剩余人数
+            'selected': True,  # 是否已选
+            'instructor_name': ['罗阳豪', '233'],
+            'classroom_id': 'A-666',
+            'time': [
+                {'day': 1, 'section': 2},
+            ],
+        },
+    ]
     return json.dumps(data), 200
 
 
