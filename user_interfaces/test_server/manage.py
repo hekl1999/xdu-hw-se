@@ -183,10 +183,50 @@ def stu_classes_list():
             'classroom_id': 'A-666',
             'time': [
                 {'day': 1, 'section': 2},
+                {'day': 1, 'section': 2},
+            ],
+        },
+        {
+            'course_info': {
+                'course_id': 'SE3002L',
+                'course_name': '信号与系统',
+                'type': '4',  # 课程属性
+                'credit': '2',
+                'period': '32',
+            },
+            'class_id': 'SE3002L-02',
+            'last_people': '10',  # 剩余人数
+            'selected': False,  # 是否已选
+            'instructor_name': ['罗阳豪', '233'],
+            'classroom_id': 'A-666',
+            'time': [
+                {'day': 1, 'section': 2},
+            ],
+        },
+        {
+            'course_info': {
+                'course_id': 'SE3002L',
+                'course_name': '信号与系统',
+                'type': '4',  # 课程属性
+                'credit': '2',
+                'period': '32',
+            },
+            'class_id': 'SE3002L-02',
+            'last_people': 0,  # 剩余人数
+            'selected': True,  # 是否已选
+            'instructor_name': ['罗阳豪', '233'],
+            'classroom_id': 'A-666',
+            'time': [
+                {'day': 1, 'section': 2},
             ],
         },
     ]
     return json.dumps(data), 200
+
+
+@app.route('/student/choice_class/<path:class_id>')
+def stu_change_selected(class_id):
+    return '', 200
 
 
 @app.route('/teacher/mine_class')

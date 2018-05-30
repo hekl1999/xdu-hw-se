@@ -8,6 +8,8 @@ const URLs = {
     stu_mine_class: Host + '/student/mine_class',
     stu_mine_grade: Host + '/student/mine_grade',
     stu_exam_info: Host + '/student/exam_info',
+    stu_classes_list: Host + '/student/classes_list',
+    stu_change_selected: Host + '/student/choice_class',
     tea_mine_class: Host + '/teacher/mine_class',
     tea_class_info: Host + '/teacher/class_info',
     tea_class_people: Host + '/teacher/class_people',
@@ -193,7 +195,54 @@ const Actions = {
         return data;
     },
     stu_classes_list: function() {
-
+        let data = [];
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            url: URLs.stu_classes_list,
+            type: 'GET',
+            async: false,
+            complete: function(jqXHR) {
+                if (200 === jqXHR.status) {
+                    data = JSON.parse(jqXHR.responseText);
+                }
+                else if (401 === jqXHR.status) {
+                    alert('您未登录，请登录后重试！');
+                    top.location.href = '../login.html'
+                }
+                else if(404 === jqXHR.status)
+                    data = [];
+                else
+                    alert('未知错误，请稍后重试！');
+            }
+        });
+        return data;
+    },
+    stu_change_selected: function(class_id) {
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            data: {
+                'class_id': class_id
+            },
+            url: URLs.stu_change_selected + '/' + class_id,
+            type: 'GET',
+            complete: function(jqXHR) {
+                if (200 === jqXHR.status) {
+                    window.location.reload();
+                }
+                else if (401 === jqXHR.status) {
+                    alert('您未登录，请登录后重试！');
+                    top.location.href = '../login.html'
+                }
+                else if(404 === jqXHR.status)
+                    data = [];
+                else
+                    alert('未知错误，请稍后重试！');
+            }
+        });
     },
 
     tea_mine_class: function() {
@@ -395,6 +444,8 @@ const Actions = {
 };
 const Tools = {
     get_grade_class: function(grade) {
+        grade = parseFloat(grade);
+
         if (-1 === grade) {
             return '';
         }
@@ -408,6 +459,8 @@ const Tools = {
             return 'danger';
     },
     get_course_type: function(class_type) {
+        class_type = parseInt(class_type);
+
         switch (class_type) {
             case 1:
                 return '必修';
@@ -420,6 +473,8 @@ const Tools = {
         }
     },
     get_weekday: function(day) {
+        day = parseInt(day);
+
         switch (day) {
             case 0:
                 return '周日';
@@ -438,6 +493,8 @@ const Tools = {
         }
     },
     get_section: function(section) {
+        section = parseInt(section);
+
         switch (section) {
             case 1:
                 return '1-2节';
@@ -526,7 +583,20 @@ function stu_mine_grade() {
 }
 function stu_classes_list() {
     let data = Actions.stu_classes_list();
-
+    for (let i in data) {
+        data[i].course_info.type = Tools.get_course_type(data[i].course_info.type);
+        for (let j in data[i].time) {
+            data[i].time[j].day = Tools.get_weekday(data[i].time[j].day);
+            data[i].time[j].section = Tools.get_section(data[i].time[j].section);
+        }
+    }
+    let classes_list = new Vue({
+        el: '#classes_list',
+        data: {
+            all_classes: data
+        }
+    });
+    $('#classes_list tbody').show();
 }
 function stu_exam_info() {
     let exam_info = Actions.stu_exam_info();
@@ -542,6 +612,9 @@ function stu_exam_info() {
         }
     });
     $('#exam_info-table tbody').show();
+}
+function stu_change_selected(class_id) {
+    Actions.stu_change_selected(class_id);
 }
 
 function tea_mine_class() {
