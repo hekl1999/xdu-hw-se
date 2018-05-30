@@ -12,6 +12,9 @@ const URLs = {
     tea_class_info: Host + '/teacher/class_info',
     tea_class_people: Host + '/teacher/class_people',
     tea_update_grade: Host + '/teacher/insert_grade',
+    tea_exam_info: Host + '/teacher/exam_info',
+    root_show_tables: Host + '/root/show_tables',
+    root_get_table: Host + '/root/get_table',
 };
 const Actions = {
     login: function() {
@@ -113,6 +116,7 @@ const Actions = {
             }
         });
     },
+
     stu_mine_class: function() {
         let data = [];
         $.ajax({
@@ -188,6 +192,7 @@ const Actions = {
         });
         return data;
     },
+
     tea_mine_class: function() {
         let data = [];
         $.ajax({
@@ -213,7 +218,7 @@ const Actions = {
         });
         return data;
     },
-    tea_classes_info: function() {
+    tea_class_info: function() {
         let data = [];
         $.ajax({
             xhrFields: {
@@ -238,7 +243,7 @@ const Actions = {
         });
         return data;
     },
-    tea_class_info: function(class_id) {
+    tea_class_people: function(class_id) {
         let data = [];
         $.ajax({
             xhrFields: {
@@ -304,6 +309,85 @@ const Actions = {
                     alert('未知错误，请稍后重试！');
             }
         });
+    },
+    tea_exam_info: function() {
+        let data = [];
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            url: URLs.tea_exam_info,
+            type: 'GET',
+            async: false,
+            complete: function(jqXHR) {
+                if (200 === jqXHR.status) {
+                    data = JSON.parse(jqXHR.responseText);
+                }
+                else if (401 === jqXHR.status) {
+                    alert('您未登录，请登录后重试！');
+                    top.location.href = '../login.html'
+                }
+                else if(404 === jqXHR.status)
+                    data = [];
+                else
+                    alert('未知错误，请稍后重试！');
+            }
+        });
+        return data;
+    },
+
+    root_show_tables: function() {
+        let data = [];
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            url: URLs.root_show_tables,
+            type: 'GET',
+            async: false,
+            complete: function(jqXHR) {
+                if (200 === jqXHR.status) {
+                    data = JSON.parse(jqXHR.responseText);
+                }
+                else if (401 === jqXHR.status) {
+                    alert('您未登录，请登录后重试！');
+                    top.location.href = '../login.html'
+                }
+                else if(404 === jqXHR.status)
+                    data = [];
+                else
+                    alert('未知错误，请稍后重试！');
+            }
+        });
+        return data;
+    },
+    root_get_table: function(table_name) {
+        let data = [];
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            data: {
+                'table_name': table_name
+            },
+            url: URLs.root_get_table + '/' + table_name,
+            type: 'GET',
+            async: false,
+            complete: function(jqXHR) {
+                if (200 === jqXHR.status) {
+                    data = JSON.parse(jqXHR.responseText);
+                }
+                else if (401 === jqXHR.status) {
+                    alert('您未登录，请登录后重试！');
+                    top.location.href = '../login.html'
+                }
+                else if(404 === jqXHR.status)
+                    data = [];
+                else
+                    alert('未知错误，请稍后重试！');
+            }
+        });
+        return data;
     },
 };
 const Tools = {
@@ -469,10 +553,9 @@ function tea_mine_class() {
         }
     });
     $('#mine_class-table tbody').show();
-
 }
 function tea_load_classes_list() {
-    let data = Actions.tea_classes_info();
+    let data = Actions.tea_class_info();
     let course_count = {};
     for (let i in data) {
         if (!course_count[data[i]['course_name']]) {
@@ -490,7 +573,7 @@ function tea_students_list() {
     const class_id = get_url_param('class_id');
 
     // Class info.
-    let data = Actions.tea_classes_info();
+    let data = Actions.tea_class_info();
     let class_info = new Vue({
         el: '#class_info-table',
         data: {
@@ -520,7 +603,7 @@ function tea_students_list() {
     $('#class_info-table tbody').show();
 
     // Students List.
-    data = Actions.tea_class_info(class_id);
+    data = Actions.tea_class_people(class_id);
     class_info.$data.students_count = data.length;
     for (let i in data) {
         data[i].grade_class = Tools.get_grade_class(data[i].grade);
@@ -553,11 +636,38 @@ function tea_change_grade(mod) {
     else  // Submit
         Actions.tea_update_grade(get_url_param('class_id'));
 }
+function tea_exam_info() {
+    let exam_info = Actions.tea_exam_info();
+    new Vue({
+        el: '#exam_info-table',
+        data: {
+            exams: exam_info
+        }
+    });
+    $('#exam_info-table tbody').show();
+}
+
+function root_show_tables() {
+    let data = Actions.root_show_tables();
+    for (let i in data)
+        $('#tables-list').append('<dd><a href="./content/root_get_table.html?table_name=' + data[i] + '" target="content">' + data[i] + '</a></dd>');
+}
+function root_get_table() {
+    const table_name = get_url_param('table_name');
+    let data = Actions.root_get_table(table_name);
+    let table = new Vue({
+        el: '#table',
+        data: {
+            table: data
+        }
+    });
+    $('#table').show();
+}
 
 // Tools
 function change_url() {
     let frame_url = window.frames[0].window.location.href;
-    setCookie('frame_url', frame_url, 1);
+    setCookie('frame_url', frame_url, 0.001);
 }
 function setCookie(c_name, value, expire_days) {
     let ex_date = new Date();
