@@ -1,5 +1,5 @@
 // URLs
-const Host = 'http://192.168.20.101:5000';
+const Host = 'http://127.0.0.1:8080';
 const URLs = {
     login: Host + '/login',
     who_am_i: Host + '/who_am_i',
@@ -436,6 +436,9 @@ function stu_mine_grade() {
         }
     });
     $('#mine_grade-table tbody').show();
+}
+function stu_course_selection() {
+
 }
 function stu_exam_info() {
     let exam_info = Actions.stu_exam_info();

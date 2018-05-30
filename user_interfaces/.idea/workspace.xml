@@ -17,7 +17,7 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
+            <state relative-caret-position="57">
               <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
@@ -26,28 +26,18 @@
       <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+            <state relative-caret-position="361">
+              <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="leader.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="leader.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/leader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
-              <caret line="289" column="39" lean-forward="true" selection-start-line="289" selection-start-column="39" selection-end-line="289" selection-end-column="39" />
+            <state relative-caret-position="7144">
+              <caret line="440" selection-start-line="440" selection-end-line="440" />
               <folding>
-                <element signature="e#546#1992#0" />
-                <element signature="e#2019#2416#0" />
-                <element signature="e#2448#3366#0" />
-                <element signature="e#3391#3700#0" />
-                <element signature="e#3733#4383#0" />
-                <element signature="e#4416#5066#0" />
-                <element signature="e#5098#5747#0" />
-                <element signature="e#5780#6430#0" />
-                <element signature="e#6465#7115#0" />
-                <element signature="e#7156#7976#0" />
                 <element signature="n#!!block;n#login#0" />
                 <element signature="n#!!block;n#who_am_i#0" />
                 <element signature="n#!!block;n#change_passwd#0" />
@@ -58,6 +48,7 @@
                 <element signature="n#!!block;n#tea_mine_class#0" />
                 <element signature="n#!!block;n#tea_load_classes_list#0" />
                 <element signature="n#!!block;n#tea_students_list#0" />
+                <element signature="n#!!block;n#tea_change_grade#0" />
                 <element signature="n#!!block;n#change_url#0" />
                 <element signature="n#!!block;n#setCookie#0" />
                 <element signature="n#!!block;n#getCookie#0" />
@@ -67,11 +58,38 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="stu_class_list.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/content/stu_class_list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stu_mine_class.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/content/stu_mine_class.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="8" column="21" selection-end-line="48" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stu_exam_info.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/content/stu_exam_info.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="tea_students_list.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/content/tea_students_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="562">
-              <caret line="63" column="8" lean-forward="true" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
+            <state relative-caret-position="1197">
+              <caret line="63" column="8" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -79,7 +97,7 @@
       <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
+            <state relative-caret-position="323">
               <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
             </state>
           </provider>
@@ -88,7 +106,7 @@
       <file leaf-file-name="instructor.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/instructor.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="972">
+            <state relative-caret-position="684">
               <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
             </state>
           </provider>
@@ -127,7 +145,6 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/hhh.html" />
         <option value="$PROJECT_DIR$/js/url.js" />
-        <option value="$PROJECT_DIR$/test_server/manage.py" />
         <option value="$PROJECT_DIR$/js/ajax.js" />
         <option value="$PROJECT_DIR$/teacher.html" />
         <option value="$PROJECT_DIR$/css/login.css" />
@@ -138,7 +155,6 @@
         <option value="$PROJECT_DIR$/content/students_list.html" />
         <option value="$PROJECT_DIR$/content/tea_classes_list.html" />
         <option value="$PROJECT_DIR$/js/main.js" />
-        <option value="$PROJECT_DIR$/content/stu_class_list.html" />
         <option value="$PROJECT_DIR$/content/stu_exam_info.html" />
         <option value="$PROJECT_DIR$/content/stu_mine_class.html" />
         <option value="$PROJECT_DIR$/content/stu_mine_grade.html" />
@@ -146,7 +162,10 @@
         <option value="$PROJECT_DIR$/css/main.css" />
         <option value="$PROJECT_DIR$/content/tea_students_list.html" />
         <option value="$PROJECT_DIR$/instructor.html" />
+        <option value="$PROJECT_DIR$/test_server/manage.py" />
         <option value="$PROJECT_DIR$/js/leader.js" />
+        <option value="$PROJECT_DIR$/content/stu_course_selection.html" />
+        <option value="$PROJECT_DIR$/content/stu_class_list.html" />
       </list>
     </option>
   </component>
@@ -184,12 +203,12 @@
             <path>
               <item name="user_interfaces" type="b2602c69:ProjectViewProjectNode" />
               <item name="user_interfaces" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="user_interfaces" type="b2602c69:ProjectViewProjectNode" />
               <item name="user_interfaces" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="test_server" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -208,7 +227,7 @@
     <property name="node.js.selected.package.prettier" value="" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="watcher.settings" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -255,14 +274,17 @@
       <workItem from="1527067451303" duration="17094000" />
       <workItem from="1527152099639" duration="10292000" />
       <workItem from="1527407207338" duration="4284000" />
+      <workItem from="1527587503674" duration="10069000" />
+      <workItem from="1527641977911" duration="248000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104143000" />
+    <option name="totallyTimeSpent" value="114460000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="0" y="36" width="1920" height="1044" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12135417" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -278,9 +300,9 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -291,17 +313,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="6" />
+      <option name="time" value="7" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/leader.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
@@ -341,9 +356,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1458">
           <caret line="54" column="13" selection-start-line="46" selection-start-column="8" selection-end-line="54" selection-end-column="13" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -394,9 +406,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1458">
           <caret line="54" column="13" selection-start-line="46" selection-start-column="8" selection-end-line="54" selection-end-column="13" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -524,16 +533,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1458">
           <caret line="54" column="13" selection-start-line="46" selection-start-column="8" selection-end-line="54" selection-end-column="13" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_server/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
@@ -566,27 +565,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/content/stu_class_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="5" column="7" lean-forward="true" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/content/stu_exam_info.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/content/stu_mine_class.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/content/stu_mine_grade.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -603,54 +581,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
+        <state relative-caret-position="323">
           <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/instructor.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="972">
+        <state relative-caret-position="684">
           <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
+        <state relative-caret-position="57">
           <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/content/tea_students_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="562">
-          <caret line="63" column="8" lean-forward="true" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
+        <state relative-caret-position="1197">
+          <caret line="63" column="8" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_server/manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="16" column="19" lean-forward="true" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/leader.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="289" column="39" lean-forward="true" selection-start-line="289" selection-start-column="39" selection-end-line="289" selection-end-column="39" />
+        <state relative-caret-position="7144">
+          <caret line="440" selection-start-line="440" selection-end-line="440" />
           <folding>
-            <element signature="e#546#1992#0" />
-            <element signature="e#2019#2416#0" />
-            <element signature="e#2448#3366#0" />
-            <element signature="e#3391#3700#0" />
-            <element signature="e#3733#4383#0" />
-            <element signature="e#4416#5066#0" />
-            <element signature="e#5098#5747#0" />
-            <element signature="e#5780#6430#0" />
-            <element signature="e#6465#7115#0" />
-            <element signature="e#7156#7976#0" />
             <element signature="n#!!block;n#login#0" />
             <element signature="n#!!block;n#who_am_i#0" />
             <element signature="n#!!block;n#change_passwd#0" />
@@ -661,11 +636,34 @@
             <element signature="n#!!block;n#tea_mine_class#0" />
             <element signature="n#!!block;n#tea_load_classes_list#0" />
             <element signature="n#!!block;n#tea_students_list#0" />
+            <element signature="n#!!block;n#tea_change_grade#0" />
             <element signature="n#!!block;n#change_url#0" />
             <element signature="n#!!block;n#setCookie#0" />
             <element signature="n#!!block;n#getCookie#0" />
             <element signature="n#!!block;n#get_url_param#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/stu_course_selection.html" />
+    <entry file="file://$PROJECT_DIR$/content/stu_mine_class.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="21" selection-end-line="48" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/stu_exam_info.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/stu_class_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>

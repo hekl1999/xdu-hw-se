@@ -1,5 +1,5 @@
 from flask import Flask, request, g, redirect, session
-from flask.ext.cors import CORS
+from flask_cors import CORS
 import os
 import sqlite3
 import json
@@ -7,7 +7,7 @@ import json
 DATABASE = 'db.sqlite'
 SECRET_KEY = os.urandom(233)
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True, origin=['127.0.0.1', 'localhost'])
 app.config.from_object(__name__)
 
 
@@ -45,10 +45,12 @@ def login():
     else:
         return 'passwd_wrong', 403
 
+
 @app.route('/who_am_i')
 def who_am_i():
     data = {'type': 'student', 'name': 'hhh'};
     return json.dumps(data), 200
+
 
 @app.route('/change_passwd', methods=['POST'])
 def change_passwd():
@@ -58,6 +60,7 @@ def change_passwd():
         return 'bad', 400
     else:
         return '', 401
+
 
 @app.route('/logout')
 def logout():
@@ -92,6 +95,7 @@ def stu_mine_grade():
         'grade': 100
     }, ]
     return json.dumps(data), 200
+
 
 @app.route('/student/mine_class')
 def stu_mine_class():
@@ -129,6 +133,7 @@ def stu_mine_class():
         'section': 1
     }, ]
     return json.dumps(data), 200
+
 
 @app.route('/student/exam_info')
 def stu_exam_info():
@@ -196,6 +201,7 @@ def tea_mine_class():
         'section': 1
     }, ]
     return json.dumps(data), 200
+
 
 @app.route('/teacher/class_info')
 def tea_class_info():
