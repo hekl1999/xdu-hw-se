@@ -9,7 +9,6 @@ import json
 @teacher.route('/mine_class')
 @login_required
 def mine_class():
-    print(request.cookies)
     mine_teachs = Teach.query.filter_by(instructor_id=current_user.id).all()
     if len(mine_teachs) == 0:
         return jsonify({'message':'no class'}), 404
@@ -33,33 +32,34 @@ def mine_class():
 @teacher.route('/class_info')
 @login_required
 def tea_class():
-    tea_infos = Teach.query.all()
-    print('cookies:')
-    print(request.cookies)
-    # print('cookies:')
-    print(session)
-    print(tea_infos)
-    if len(tea_infos) == 0:
+    mine_teachs = Teach.query.filter_by(instructor_id=current_user.id).all()
+    schs = Schedule.query.filter(Schedule.class_id.in_([tea.class_id for tea in mine_teachs]))
+    if len(mine_teachs) == 0:
         return jsonify({'message': 'no class'}), 404
-    else:
-        result= []
-        for tea_info in tea_infos:
-            re = {'class_id': tea_info.classes.id,
-                  'course_id': tea_info.classes.course.id,
-                  'course_name': tea_info.classes.course.name,
-                  'type': tea_info.classes.course.type}
-            schs = Schedule.query.filter_by(class_id=tea_info.classes.id).all()
-            re_time = [{'day': s.day, 'section': s.section} for s in schs]
-            re['time'] = re_time
-            result.append(re)
-        print(result)
-        return jsonify(result)
+    result = []
+    temp_re = {}
+    for mine_cla in mine_teachs:
+        mine_cla =mine_cla.classes
+        class_id = mine_cla.id
+        temp_re[class_id] = {
+            'class_id': class_id,
+            'course_id': mine_cla.course.id,
+            'course_name': mine_cla.course.name,
+            'type': mine_cla.course.type,
+            'classroom_id': [],
+            'time': []
+        }
+    for sch in schs:
+        temp_re[sch.class_id]['classroom_id'].append(sch.classroom_id)
+        temp_re[sch.class_id]['time'].append({'day':sch.day,'section':sch.section})
+    for keys in temp_re.keys():
+        result.append(temp_re[keys])
+    return jsonify(result)
 
 
-@teacher.route('/class_people', methods=['POST'])
+@teacher.route('/class_people/<class_id>', methods=['GET'])
 @login_required
-def class_info():
-    class_id= request.form.get('class_id')
+def class_info(class_id):
     if class_id is None:
         return jsonify({'message':'no data'}), 401
     teas = Teach.query.filter_by(class_id=class_id).all()

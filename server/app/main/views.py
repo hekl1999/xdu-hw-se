@@ -56,7 +56,7 @@ def login():
 @main.route('/logout', methods=['GET'])
 @login_required
 def logout():
-    logout_user(current_user)
+    logout_user()
     return jsonify({'message': 'logout successful'})
 
 
@@ -64,7 +64,7 @@ def logout():
 @login_required
 def change_passwd():
     data = request.form
-    u_account = Account.query.filter_by(current_user.account).first()
+    u_account = Account.query.filter_by(current_user.id).first()
     old_password = u_account.password
     if old_password is None:
         return jsonify({'message': 'no account'}), 404
@@ -75,3 +75,10 @@ def change_passwd():
         return jsonify({'message': 'change successful'})
     else:
         return jsonify({'message': 'password error'}), 403
+
+
+@main.route('/who_am_i')
+@login_required
+def who_am_i():
+    return jsonify({"type":Account.query.filter_by(account=current_user.id).first().type,
+                    "name": current_user.name})

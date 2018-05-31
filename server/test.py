@@ -1,5 +1,7 @@
 import requests
 import json
+
+
 se = requests.Session()
 base_url = 'http://localhost:5000'
 
@@ -10,4 +12,11 @@ def test_main():
     re = se.get(base_url+'/student/exam_info').text
     print(re)
 
-test_main()
+
+a = [{'id':1,'vlues':2},{'id':2,'vlues':3}]
+b = [ {'id' : 1, 'count': 2}, {'id': 2, 'count': 3}]
+for (a,b) in [(a_dict,b_dict) for a_dict in a
+              for b_dict in b
+              ]:
+    if a['id'] == b['id']:
+        print({'a_dict': a,'b_dict': b})
