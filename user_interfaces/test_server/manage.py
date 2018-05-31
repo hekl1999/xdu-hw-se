@@ -1,5 +1,5 @@
 from flask import Flask, request, g, redirect, session
-from flask.ext.cors import CORS
+from flask_cors import CORS
 import os
 import sqlite3
 import json
@@ -7,7 +7,7 @@ import json
 DATABASE = 'db.sqlite'
 SECRET_KEY = os.urandom(233)
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True, origin=['127.0.0.1', 'localhost'])
 app.config.from_object(__name__)
 
 
@@ -45,10 +45,12 @@ def login():
     else:
         return 'passwd_wrong', 403
 
+
 @app.route('/who_am_i')
 def who_am_i():
-    data = {'type': 'student', 'name': 'hhh'};
+    data = {'type': 'student', 'name': 'hhh'}
     return json.dumps(data), 200
+
 
 @app.route('/change_passwd', methods=['POST'])
 def change_passwd():
@@ -58,6 +60,7 @@ def change_passwd():
         return 'bad', 400
     else:
         return '', 401
+
 
 @app.route('/logout')
 def logout():
@@ -92,6 +95,7 @@ def stu_mine_grade():
         'grade': 100
     }, ]
     return json.dumps(data), 200
+
 
 @app.route('/student/mine_class')
 def stu_mine_class():
@@ -130,6 +134,7 @@ def stu_mine_class():
     }, ]
     return json.dumps(data), 200
 
+
 @app.route('/student/exam_info')
 def stu_exam_info():
     data = [{
@@ -158,6 +163,70 @@ def stu_exam_info():
         'exam_grade': -1
     }, ]
     return json.dumps(data), 200
+
+
+@app.route('/student/classes_list')
+def stu_classes_list():
+    data = [
+        {
+            'course_info': {
+                'course_id': 'SE3002L',
+                'course_name': '信号与系统',
+                'type': '4',  # 课程属性
+                'credit': '2',
+                'period': '32',
+            },
+            'class_id': 'SE3002L-02',
+            'last_people': '21',  # 剩余人数
+            'selected': True,  # 是否已选
+            'instructor_name': ['罗阳豪', '233'],
+            'classroom_id': 'A-666',
+            'time': [
+                {'day': 1, 'section': 2},
+                {'day': 1, 'section': 2},
+            ],
+        },
+        {
+            'course_info': {
+                'course_id': 'SE3002L',
+                'course_name': '信号与系统',
+                'type': '4',  # 课程属性
+                'credit': '2',
+                'period': '32',
+            },
+            'class_id': 'SE3002L-02',
+            'last_people': '10',  # 剩余人数
+            'selected': False,  # 是否已选
+            'instructor_name': ['罗阳豪', '233'],
+            'classroom_id': 'A-666',
+            'time': [
+                {'day': 1, 'section': 2},
+            ],
+        },
+        {
+            'course_info': {
+                'course_id': 'SE3002L',
+                'course_name': '信号与系统',
+                'type': '4',  # 课程属性
+                'credit': '2',
+                'period': '32',
+            },
+            'class_id': 'SE3002L-02',
+            'last_people': 0,  # 剩余人数
+            'selected': True,  # 是否已选
+            'instructor_name': ['罗阳豪', '233'],
+            'classroom_id': 'A-666',
+            'time': [
+                {'day': 1, 'section': 2},
+            ],
+        },
+    ]
+    return json.dumps(data), 200
+
+
+@app.route('/student/choice_class/<path:class_id>')
+def stu_change_selected(class_id):
+    return '', 200
 
 
 @app.route('/teacher/mine_class')
@@ -197,45 +266,117 @@ def tea_mine_class():
     }, ]
     return json.dumps(data), 200
 
+
 @app.route('/teacher/class_info')
 def tea_class_info():
-    if request.args.get('class_id'):
-        data = [
-            {'student_id': '16130120191', 'student_name': '罗阳豪', 'grade': '100'},
-            {'student_id': '16130120201', 'student_name': '方浩杰', 'grade': '80'},
-            {'student_id': '16130120181', 'student_name': '郑昊鹏', 'grade': '-1'},
+    data = [{
+        'class_id': 'SE3002L-01',
+        'course_id': 'SE3002L',
+        'course_name': '信号与系统',
+        'type': 4,
+        'classroom_id': 'A-325',
+        'time': [{'day': 1, 'section': 2}, {'day': 3, 'section': 4}],
+    }, {
+        'class_id': 'SE3002L-02',
+        'course_id': 'SE3002L',
+        'course_name': '信号与系',
+        'type': 4,
+        'classroom_id': 'A-325',
+        'time': [{'day': 2, 'section': 2}, {'day': 3, 'section': 4}],
+    }, {
+        'class_id': 'SE3002L-03',
+        'course_id': 'SE3002L',
+        'course_name': '信号与系统',
+        'type': 4,
+        'classroom_id': 'A-325',
+        'time': [{'day': 3, 'section': 2}, {'day': 3, 'section': 4}],
+    }, {
+        'class_id': 'SE3002L-04',
+        'course_id': 'SE3002L',
+        'course_name': '信号与系统',
+        'type': 4,
+        'classroom_id': 'A-325',
+        'time': [{'day': 4, 'section': 2}, {'day': 3, 'section': 4}],
+    },
+    ]
+    return json.dumps(data), 200
+
+
+@app.route('/teacher/class_people/<path:class_id>')
+def tea_class_people(class_id):
+    data = [
+        {'student_id': '16130120191', 'student_name': '罗阳豪', 'grade': 100},
+        {'student_id': '16130120201', 'student_name': '方浩杰', 'grade': 80},
+        {'student_id': '16130120181', 'student_name': '郑昊鹏', 'grade': -1},
+        {'student_id': '16130120181', 'student_name': '郑昊鹏', 'grade': -1},
+        {'student_id': '16130120181', 'student_name': '郑昊鹏', 'grade': -1},
+    ]
+    return json.dumps(data), 200
+
+
+@app.route('/teacher/insert_grade', methods=['POST'])
+def tea_insert_grade():
+    print(request.get_data())
+    return '', 200
+
+
+@app.route('/teacher/exam_info')
+def tea_exam_info():
+    data = [{
+        'course_name': '数字电路与系统设计',
+        'classroom_id': 'A-311',
+        'date': '2018-03-23',
+        'time': '20:00:00',
+    }, {
+        'course_name': '数字电路与系统设计',
+        'classroom_id': 'A-311',
+        'date': '2018-03-23',
+        'time': '20:00:00',
+    }, {
+        'course_name': '数字电路与系统设计',
+        'classroom_id': 'A-311',
+        'date': '2018-03-23',
+        'time': '20:00:00',
+    }, {
+        'course_name': '数字电路与系统设计',
+        'classroom_id': 'A-311',
+        'date': '2018-03-23',
+        'time': '20:00:00',
+    }, ]
+    return json.dumps(data), 200
+
+
+@app.route('/root/show_tables')
+def root_show_tables():
+    data = [
+        'account',
+        'admin',
+        'class',
+        'classroom',
+        'course',
+        'curricula_variable',
+        'exam',
+        'exam_room',
+        'instructor',
+        'schedule',
+        'student',
+        'superior',
+        'take_the_exam',
+        'teach',
+    ]
+    return json.dumps(data), 200
+
+
+@app.route('/root/get_table/<path:table_name>')
+def root_get_table(table_name):
+    data = {
+        'format': ['hhh1', 'hhh2', 'hhh3', 'hhh4'],
+        'data': [
+            ('1, 1', '1, 2', '1, 3', '1, 4'),
+            ('2, 1', '2, 2', '2, 3', '2, 4'),
+            ('3, 1', '3, 2', '3, 3', '3, 4'),
         ]
-    else:
-        data = [{
-            'class_id': 'SE3002L-01',
-            'course_id': 'SE3002L',
-            'course_name': '信号与系统',
-            'type': 4,
-            'classroom_id': 'A-325',
-            'time': [{'day': 1, 'section': '2'}, {'day': 3, 'section': 4}],
-        }, {
-            'class_id': 'SE3002L-02',
-            'course_id': 'SE3002L',
-            'course_name': '信号与系',
-            'type': 4,
-            'classroom_id': 'A-325',
-            'time': [{'day': 2, 'section': '2'}, {'day': 3, 'section': 4}],
-        }, {
-            'class_id': 'SE3002L-03',
-            'course_id': 'SE3002L',
-            'course_name': '信号与系统',
-            'type': 4,
-            'classroom_id': 'A-325',
-            'time': [{'day': 3, 'section': '2'}, {'day': 3, 'section': 4}],
-        }, {
-            'class_id': 'SE3002L-04',
-            'course_id': 'SE3002L',
-            'course_name': '信号与系统',
-            'type': 4,
-            'classroom_id': 'A-325',
-            'time': [{'day': 4, 'section': '2'}, {'day': 3, 'section': 4}],
-        },
-        ]
+    }
     return json.dumps(data), 200
 
 

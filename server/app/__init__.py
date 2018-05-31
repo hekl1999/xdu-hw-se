@@ -2,7 +2,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from config import config
 from flask_login import LoginManager
-from flask_cors import CORS
 
 app = Flask(__name__)
 db = SQLAlchemy()
@@ -16,18 +15,20 @@ def create_app(config_name):
     db.init_app(app)
     login_manager.init_app(app)
 
-    CORS(app, supports_credentials=True)
-
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
     from.student import student as student_blueprint
+<<<<<<< HEAD
     app.register_blueprint(student_blueprint, url_prefix='/student')
+=======
+    app.register_blueprint(student_blueprint)
+>>>>>>> f867b70adc74eafab7efd78b42f69b55f071f23b
 
     from .teacher import teacher as teacher_blueprint
-    app.register_blueprint(teacher_blueprint,url_prefix='/teacher')
+    app.register_blueprint(teacher_blueprint)
 
     from .root import root as root_blueprint
-    app.register_blueprint(root_blueprint,url_prefix='/root')
+    app.register_blueprint(root_blueprint)
 
     return app
