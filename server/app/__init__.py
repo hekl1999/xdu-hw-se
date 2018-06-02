@@ -19,11 +19,10 @@ def create_app(config_name):
     app.register_blueprint(main_blueprint)
 
     from.student import student as student_blueprint
-<<<<<<< HEAD
+
     app.register_blueprint(student_blueprint, url_prefix='/student')
-=======
+
     app.register_blueprint(student_blueprint)
->>>>>>> f867b70adc74eafab7efd78b42f69b55f071f23b
 
     from .teacher import teacher as teacher_blueprint
     app.register_blueprint(teacher_blueprint)
