@@ -201,9 +201,11 @@ def tea_mine_class():
 def tea_class_info():
     if request.args.get('class_id'):
         data = [
-            {'student_id': '16130120191', 'student_name': '罗阳豪', 'grade': '100'},
-            {'student_id': '16130120201', 'student_name': '方浩杰', 'grade': '80'},
-            {'student_id': '16130120181', 'student_name': '郑昊鹏', 'grade': '-1'},
+            {'student_id': '16130120191', 'student_name': '罗阳豪', 'grade': 100},
+            {'student_id': '16130120201', 'student_name': '方浩杰', 'grade': 80},
+            {'student_id': '16130120181', 'student_name': '郑昊鹏', 'grade': -1},
+            {'student_id': '16130120181', 'student_name': '郑昊鹏', 'grade': -1},
+            {'student_id': '16130120181', 'student_name': '郑昊鹏', 'grade': -1},
         ]
     else:
         data = [{
@@ -212,31 +214,37 @@ def tea_class_info():
             'course_name': '信号与系统',
             'type': 4,
             'classroom_id': 'A-325',
-            'time': [{'day': 1, 'section': '2'}, {'day': 3, 'section': 4}],
+            'time': [{'day': 1, 'section': 2}, {'day': 3, 'section': 4}],
         }, {
             'class_id': 'SE3002L-02',
             'course_id': 'SE3002L',
             'course_name': '信号与系',
             'type': 4,
             'classroom_id': 'A-325',
-            'time': [{'day': 2, 'section': '2'}, {'day': 3, 'section': 4}],
+            'time': [{'day': 2, 'section': 2}, {'day': 3, 'section': 4}],
         }, {
             'class_id': 'SE3002L-03',
             'course_id': 'SE3002L',
             'course_name': '信号与系统',
             'type': 4,
             'classroom_id': 'A-325',
-            'time': [{'day': 3, 'section': '2'}, {'day': 3, 'section': 4}],
+            'time': [{'day': 3, 'section': 2}, {'day': 3, 'section': 4}],
         }, {
             'class_id': 'SE3002L-04',
             'course_id': 'SE3002L',
             'course_name': '信号与系统',
             'type': 4,
             'classroom_id': 'A-325',
-            'time': [{'day': 4, 'section': '2'}, {'day': 3, 'section': 4}],
+            'time': [{'day': 4, 'section': 2}, {'day': 3, 'section': 4}],
         },
         ]
     return json.dumps(data), 200
+
+
+@app.route('/teacher/insert_grade', methods=['POST'])
+def tea_insert_grade():
+    print(request.get_data())
+    return '', 200
 
 
 if __name__ == '__main__':

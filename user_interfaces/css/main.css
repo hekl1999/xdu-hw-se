@@ -8,3 +8,11 @@
 a.signature {
     color: #0078d7;
 }
+
+body.content {
+    padding: 20px;
+}
+
+td.grade-td input {
+    width: 100%;
+}
