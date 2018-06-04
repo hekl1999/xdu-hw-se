@@ -19,7 +19,7 @@ class Config:
 # 开发环境
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite') # 我本机的测试数据库,暂时使用sqlite
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')  # 我本机的测试数据库,暂时使用sqlite
 
 # 测试环境
 class TestingConfig(Config):

@@ -102,7 +102,7 @@ def insert_into_Curricula_variable(data_list):
         if stu is not None and cla is not None:
             if grade is None:
                 grade = 0
-            c_v = Curricula_variable(student=stu,classes=cla,grade=grade)
+            c_v = CurriculaVariable(student=stu,classes=cla,grade=grade)
             db.session.add(c_v)
     db.session.commit()
 
@@ -129,9 +129,11 @@ def insert_into_Schedule(data_list):
 
 
 def insert_into_Exam_room(data_list):
+    print(data_list)
     for data in data_list:
-        exam = Exam.query.filter_by(id= data['exam_id']).first()
+        exam = Exam.query.filter_by(id=data['exam_id']).first()
         classroom = Classroom.query.filter_by(id=data['classroom_id']).first()
+        print(exam.id, classroom.id)
         if exam is not None and classroom is not None:
             E_R = Exam_room(exam=exam,classroom=classroom)
             db.session.add(E_R)
@@ -171,7 +173,10 @@ insert_list = {'account': insert_into_account,
 def run_text():
     file_data = get_data()
     for fun in insert_list:
-        insert_list[fun](file_data[fun])
+        if fun != 'exam_room' and fun != 'exam':
+            pass
+        else:
+            insert_list[fun](file_data[fun])
 
 
 def change_to_csv(data_file):

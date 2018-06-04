@@ -6,6 +6,6 @@ account,passwd,type
 16010000212,6789,instructor
 16010000213,4567,instructor
 16010000214,7890,instructor
-u123,1356,superior
-u234,2468,admin
-u345,4680,root
+123,1356,superior
+234,2468,admin
+345,4680,root

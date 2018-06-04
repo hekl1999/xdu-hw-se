@@ -27,9 +27,9 @@ def load_user(account):
         return Student.query.get(int(account.account))
     elif account.type == 'instructor':
         return Instructor.query.get(int(account.account))
-    elif account.type == 'leader':
+    elif account.type == 'superior':
         return Superior.query.get(int(account.account))
-    elif account.type == 'Admin':
+    elif account.type == 'admin':
         return Admin.query.get(int(account.account))
     elif account in app.config['FLASKY_ADMIN']:
         return account

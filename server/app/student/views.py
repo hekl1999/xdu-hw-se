@@ -120,7 +120,7 @@ def exam_info():
     all_exam = [exam.exam_id for exam in my_exams]
     exam_infoes = Exam.query.filter(Exam.id.in_(all_exam)).all()
     class_infos = Class.query.filter(Class.id.in_([exam.classes_id for exam in exam_infoes])).all()
-    for (exam_infos,class_info,my_grade) in [(exam_infos,class_info,my_grade)
+    for (exam_infos,class_info,my_grade) in [(exam_infos, class_info,my_grade)
                                              for exam_infos in exam_infoes
                                              for class_info in class_infos
                                              for my_grade in my_exams]:

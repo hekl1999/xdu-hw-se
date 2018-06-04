@@ -28,4 +28,6 @@ def create_app(config_name):
     from .root import root as root_blueprint
     app.register_blueprint(root_blueprint, url_prefix='/root')
 
+    from .admin import admin as admin_blueprint
+    app.register_blueprint(admin_blueprint, url_prefix='/admin')
     return app
