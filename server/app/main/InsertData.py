@@ -4,7 +4,6 @@ import csv
 import os
 import pandas as pd
 
-
 data_dir = 'D:\Code\SE-Project\server\data'
 
 
@@ -178,4 +177,3 @@ def run_text():
 def change_to_csv(data_file):
     os.chdir(data_dir)
     data_xlsx = pd.read_excel(data_file+'.xlsx', index_col=0)
-    data_xlsx.to_csv(data_file+'.csv', encoding='utf-8')
