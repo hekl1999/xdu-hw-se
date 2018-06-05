@@ -28,10 +28,10 @@ def account_list():
     return jsonify(result)
 
 
-@admin.route('/exam_info', methods=['POST', 'GET'])
+@admin.route('/exam_info/')
 @login_required
 def get_exam():
-    exam_id = request.form.get('exam_id')
+    exam_id = request.args.get('exam_id')
     if exam_id is None:
         exam_rooms = Exam_room.query.all()
         result = []
@@ -65,10 +65,10 @@ def get_exam():
         return jsonify(result)
 
 
-@admin.route('/class_list', methods=['POST', 'GET'])
+@admin.route('/class_list/')
 @login_required
 def get_class_list():
-    class_id = request.form.get('class_id')
+    class_id = request.args.get('class_id')
     if class_id is None:
         all_classes = Class.query.all()
         result = [
@@ -76,7 +76,7 @@ def get_class_list():
              'course_id': class_info.course.id,
              'course_name': class_info.course.name,
              'instructor_name': [teacher.teacher.name for teacher in
-                                Teach.query.filter_by(class_id=class_info.id).all()],
+                                 Teach.query.filter_by(class_id=class_info.id).all()],
              'classroom_id': Schedule.query.filter_by(class_id=class_info.id).first().classroom_id
              }
             for class_info in all_classes
@@ -103,3 +103,31 @@ def get_class_list():
                         for student in CurriculaVariable.query.filter_by(class_id=class_info.id).all()]
         }
         return jsonify(result)
+
+
+@admin.route('/course_list')
+@login_required
+def get_course_list():
+    return jsonify([{'course_id': course.id,
+                     'course_name': course.name,
+                     'type': course.type,
+                     'credit': course.credit,
+                     'period': course.period}
+                    for course in Course.query.all()
+                    ])
+
+
+@admin.route('/schedule_list')
+@login_required
+def get_schedule_list():
+    all_schedule = Schedule.query.all()
+    result = []
+    for schedule in all_schedule:
+        re = {'class_id': schedule.class_id,
+              'course_name': schedule.classes.course.name,
+              'classroom_id': schedule.classroom_id,
+              'week': schedule.week,
+              'day': schedule.day,
+              'section': schedule.section}
+        result.append(re)
+    return jsonify(result)
