@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -47,54 +46,4 @@
   stu_mine_class();
 </script>
 </body>
-=======
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-  <meta charset="UTF-8">
-  <title>查看课表</title>
-  <link href="../css/bootstrap.min.css" rel="stylesheet">
-  <link href="../css/main.css" rel="stylesheet">
-</head>
-<body class="content">
-
-<table id="mine_class-table" class="table table-hover table-striped table-bordered table-condensed">
-  <thead>
-    <tr align="center">
-      <td colspan="3">课程信息</td>
-      <td colspan="4">上课安排</td>
-    </tr>
-    <tr>
-      <td>课程编号</td>
-      <td>课程名</td>
-      <td>任课老师</td>
-      <td>课室编号</td>
-      <td>教学周</td>
-      <td>星期</td>
-      <td>节</td>
-    </tr>
-  </thead>
-  <tbody hidden>
-    <tr v-for="mine_class in mine_classes">
-      <td>{{ mine_class.course_id }}</td>
-      <td>{{ mine_class.course_name }}</td>
-      <td><span v-for="teacher in mine_class.instructor_name">{{ teacher }} </span></td>
-      <td>{{ mine_class.classroom_id }}</td>
-      <td>{{ mine_class.week }}</td>
-      <td>{{ mine_class.day }}</td>
-      <td>{{ mine_class.section }}</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- JavaScript -->
-<script src="../js/vue.js"></script>
-<script src="../js/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/leader.js"></script>
-<script>
-  stu_mine_class();
-</script>
-</body>
->>>>>>> a17e993498d63fb0898dac8d649c912f2b21d598
 </html>
