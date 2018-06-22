@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>查看教学班</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/main.min.css" rel="stylesheet">
+</head>
+<body class="content">
+<a class="btn btn-default hidden-print" href="#" onclick="window.print()" style="margin-bottom: 10px;"><span class="glyphicon glyphicon-print"></span> 打印</a>
+<table id="class_info-table" class="table table-striped table-bordered table-condensed">
+  <thead>
+  <tr>
+    <td>教学班编号</td>
+    <td>课程编号</td>
+    <td>课程名</td>
+    <td>课程属性</td>
+    <td>教室编号</td>
+    <td>上课时间</td>
+    <td>总人数</td>
+  </tr>
+  </thead>
+  <tbody hidden>
+  <tr>
+    <td>{{ class_id }}</td>
+    <td>{{ course_id }}</td>
+    <td>{{ course_name }}</td>
+    <td>{{ type }}</td>
+    <td>{{ classroom_id }}</td>
+    <td>{{ time }}</td>
+    <td>{{ students_count }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<table id="students_list-table" class="table table-hover table-striped table-bordered table-condensed">
+  <thead>
+  <tr>
+    <td>学号</td>
+    <td>姓名</td>
+    <td>成绩</td>
+  </tr>
+  </thead>
+  <tbody hidden>
+  <tr v-for="student in students">
+    <td>{{ student.student_id }}</td>
+    <td>{{ student.student_name }}</td>
+    <td class="grade-td" v-bind:class="student.grade_class">{{ student.grade }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<button id="update_grade-start" class="btn btn-default btn-primary hidden-print" onclick="tea_change_grade(1)">修改成绩</button>
+<div id="update_grade-started hidden-print" hidden>
+  <button id="update_grade-submit" class="btn btn-default btn-primary" onclick="tea_change_grade(0)">提交</button>
+  <button id="update_grade-cancel" class="btn btn-default" onclick="tea_change_grade(-1)" hidden>取消</button>
+</div>
+
+<!-- JavaScript -->
+<script src="../js/vue.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/leader.min.js"></script>
+<script>
+  tea_students_list();
+</script>
+</body>
+</html>

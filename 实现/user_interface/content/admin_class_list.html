@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>教学班列表</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/main.min.css" rel="stylesheet">
+</head>
+<body class="content">
+<a class="btn btn-default hidden-print" href="#" onclick="window.print()" style="margin-bottom: 10px;"><span class="glyphicon glyphicon-print"></span> 打印</a>
+<table id="class_list" class="table table-hover table-bordered table-condensed">
+  <thead>
+  <tr>
+    <td>教学班编号</td>
+    <td>课程编号</td>
+    <td>课程名</td>
+    <td>任课教师</td>
+  </tr>
+  </thead>
+  <tbody hidden>
+  <tr v-for="one_class in all_classes">
+    <td><a v-bind:href="'./admin_class_detail.html?class_id=' + one_class.class_id">{{ one_class.class_id }}</a></td>
+    <td>{{ one_class.course_id }}</td>
+    <td>{{ one_class.course_name }}</td>
+    <td>
+      <span v-for="teacher in one_class.instructor_name">{{ teacher }}</span>　
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- JavaScript -->
+<script src="../js/vue.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/leader.min.js"></script>
+<script>
+    admin_class_list();
+</script>
+</body>
+</html>

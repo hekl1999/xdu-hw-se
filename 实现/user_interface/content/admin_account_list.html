@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>账户列表</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/main.min.css" rel="stylesheet">
+</head>
+<body class="content">
+<a class="btn btn-default hidden-print" href="#" onclick="window.print()" style="margin-bottom: 10px;"><span class="glyphicon glyphicon-print"></span> 打印</a>
+<form class="form-inline hidden-print" style="margin-bottom: 10px;">
+  <div class="form-group">
+    <label for="account-input">账号</label>
+    <input type="text" class="form-control" id="account-input" placeholder="Account" autocomplete="off" oninput="input_check()">
+  </div>　
+  <div class="form-group">
+    <label for="name-input">姓名</label>
+    <input type="text" class="form-control" id="name-input" placeholder="Name" autocomplete="off" oninput="input_check()">
+  </div>　
+  <div class="form-group">
+    <label for="type-input">账户类型</label>
+    <select class="form-control" id="type-input" oninput="input_check()">
+      <option value="student" selected>学生</option>
+      <option value="instructor">教师</option>
+      <option value="superior">领导</option>
+      <option value="admin">普通管理员</option>
+    </select>
+  </div>　
+  <div class="form-group">
+    <label for="passwd-input">密码</label>
+    <input type="password" class="form-control" id="passwd-input" placeholder="Password" autocomplete="off" oninput="input_check()">
+  </div>　
+  <button type="button" class="btn btn-default" id="submit-btn" title="请补全信息！" onclick="add_account_submit()" disabled>创建账户</button>
+</form>
+
+<table id="account_list" class="table table-hover table-bordered table-condensed">
+  <thead>
+  <tr>
+    <td>账号</td>
+    <td>姓名</td>
+    <td>账号类型</td>
+    <td class="hidden-print">账户操作</td>
+  </tr>
+  </thead>
+  <tbody hidden>
+  <tr v-for="account in all_accounts" v-bind:id="account.account">
+    <td>{{ account.account }}</td>
+    <td v-bind:id="account.account + '-name'">{{ account.name }}</td>
+    <td v-bind:id="account.account + '-type'">{{ account.type }}</td>
+    <td class="hidden-print">
+      <a href="#" v-bind:onclick="'admin_change_account(2, {account:\'' + account.account + '\', type:\'' + account.type + '\'})'">删除</a>
+      <a href="#" v-bind:onclick="'admin_change_account(41, \'' + account.account + '\')'">修改</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- JavaScript -->
+<script src="../js/vue.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/leader.min.js"></script>
+<script>
+    admin_account_list();
+    function input_check() {
+        let account = $('#account-input').val();
+        let name = $('#name-input').val();
+        let acco_type = $('#type-input').val();
+        let passwd = $('#passwd-input').val();
+        let submit_btn = $('#submit-btn');
+        if (!account || !name || !acco_type || !passwd) {
+            submit_btn.attr({'class': 'btn btn-default', 'disabled': true, 'title': '请补全信息！'});
+        }
+        else {
+            submit_btn.attr({'class': 'btn btn-primary', 'disabled': false, 'title': '单击发送！'});
+        }
+    }
+    function add_account_submit() {
+        let account_input = $('#account-input');
+        let name_input = $('#name-input');
+        let type_input = $('#type-input');
+        let passwd_input = $('#passwd-input');
+        let data = {
+            account: account_input.val(),
+            name: name_input.val(),
+            acco_type: type_input.val(),
+            passwd: passwd_input.val()
+        };
+        admin_change_account(1, data);
+        account_input.val('');
+        name_input.val('');
+        type_input.val('student');
+        passwd_input.val('');
+    }
+</script>
+</body>
+</html>

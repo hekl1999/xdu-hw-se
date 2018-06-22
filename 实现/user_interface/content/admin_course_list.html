@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>课程列表</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/main.min.css" rel="stylesheet">
+</head>
+<body class="content">
+<a class="btn btn-default hidden-print" href="#" onclick="window.print()" style="margin-bottom: 10px;"><span class="glyphicon glyphicon-print"></span> 打印</a>
+<form class="form-inline hidden-print" style="margin-bottom: 10px;">
+  <div class="form-group">
+    <label for="course_id-input">课程编号</label>
+    <input type="text" class="form-control" id="course_id-input" placeholder="Course ID" autocomplete="off" oninput="input_check()">
+  </div>　
+  <div class="form-group">
+    <label for="course_name-input">课程名</label>
+    <input type="text" class="form-control" id="course_name-input" placeholder="Course Name" autocomplete="off" oninput="input_check()">
+  </div>　
+  <div class="form-group">
+    <label for="type-input">课程属性</label>
+    <select class="form-control" id="type-input" oninput="input_check()">
+      <option value="1" selected>必修</option>
+      <option value="2">校任选课</option>
+      <option value="3">人文选修课</option>
+      <option value="4">学院选修课</option>
+    </select>
+  </div>　
+  <div class="form-group">
+    <label for="credit-input">学分</label>
+    <input type="text" class="form-control" id="credit-input" placeholder="Credit" autocomplete="off" oninput="input_check()">
+  </div>　
+  <div class="form-group">
+    <label for="period-input">学时</label>
+    <input type="text" class="form-control" id="period-input" placeholder="Period" autocomplete="off" oninput="input_check()">
+  </div>　
+  <button type="button" class="btn btn-default" id="submit-btn" title="请补全信息！" onclick="add_course_submit()" disabled>新建课程</button>
+</form>
+
+<table id="course_list" class="table table-hover table-bordered table-condensed">
+  <thead>
+  <tr>
+    <td>课程编号</td>
+    <td>课程名</td>
+    <td>课程属性</td>
+    <td>学分</td>
+    <td>学时</td>
+    <td class="hidden-print">课程管理</td>
+  </tr>
+  </thead>
+  <tbody hidden>
+  <tr v-for="course in all_courses" v-bind:id="course.course_id">
+    <td>{{ course.course_id }}</td>
+    <td v-bind:id="course.course_id + '-name'">{{ course.course_name }}</td>
+    <td v-bind:id="course.course_id + '-type'">{{ course.type }}</td>
+    <td v-bind:id="course.course_id + '-credit'">{{ course.credit }}</td>
+    <td v-bind:id="course.course_id + '-period'">{{ course.period }}</td>
+    <td class="hidden-print">
+      <a href="#" v-bind:onclick="'admin_change_course(2, \'' + course.course_id + '\')'">删除</a>
+      <a href="#" v-bind:onclick="'admin_change_course(41, \'' + course.course_id + '\')'">修改</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- JavaScript -->
+<script src="../js/vue.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/leader.min.js"></script>
+<script>
+    admin_course_list();
+    function input_check() {
+        let course_id = $('#course_id-input').val();
+        let course_name = $('#course_name-input').val();
+        let course_type = $('#type-input').val();
+        let credit = $('#credit-input').val();
+        let period = $('#period-input').val();
+        let submit_btn = $('#submit-btn');
+        if (!course_id || !course_name || !course_type || !credit || !period) {
+            submit_btn.attr({'class': 'btn btn-default', 'disabled': true, 'title': '请补全信息！'});
+        }
+        else {
+            submit_btn.attr({'class': 'btn btn-primary', 'disabled': false, 'title': '单击发送！'});
+        }
+    }
+    function add_course_submit() {
+        let course_id = $('#course_id-input');
+        let course_name = $('#course_name-input');
+        let course_type = $('#type-input');
+        let credit = $('#credit-input');
+        let period = $('#period-input');
+        let data = {
+            course_id: course_id.val(),
+            course_name: course_name.val(),
+            type: Tools.course_type.val(),
+            credit: credit.val(),
+            period: period.val()
+        };
+        admin_change_course(1, data);
+        course_id.val('');
+        course_name.val('');
+        course_type.val('1');
+        credit.val('');
+        period.val('');
+    }
+</script>
+</body>
+</html>

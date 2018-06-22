@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>教务系统 - 修改密码</title>
+  <link href="./css/bootstrap.min.css" rel="stylesheet">
+  <link href="./css/main.min.css" rel="stylesheet">
+  <link href="./css/login.min.css" rel="stylesheet">
+  <link rel="icon" href="./img/title_logo_home.png">
+</head>
+<body class="change-passwd">
+
+<section class="change-passwd">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-8 col-lg-offset-4 col-md-offset-3 col-sm-offset-2">
+        <div class="panel panel-default change-passwd-panel">
+          <div class="panel-heading change-passwd-heading">修改密码</div>
+          <div class="panel-body">
+            <form>
+              <div class="form-group">
+                <label for="old-passwd-input">旧密码</label>
+                <input type="password" class="form-control" id="old-passwd-input" placeholder="Old Password">
+              </div>
+              <div class="form-group">
+                <label for="new-passwd-input">新密码</label>
+                <input type="password" class="form-control" id="new-passwd-input" placeholder="New Password">
+              </div>
+              <div class="form-group">
+                <label for="re-new-passwd-input">确认新密码</label>
+                <input type="password" class="form-control" id="re-new-passwd-input" placeholder="Re-Enter New Password">
+              </div>
+              <button type="button" class="btn btn-default change-passwd-btn" onclick="change_passwd()">提交</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="js/leader.min.js"></script>
+</body>
+</html>

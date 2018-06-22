@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>查看考试</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/main.min.css" rel="stylesheet">
+</head>
+<body class="content">
+<a class="btn btn-default hidden-print" href="#" onclick="window.print()" style="margin-bottom: 10px;"><span class="glyphicon glyphicon-print"></span> 打印</a>
+<table id="table" class="table table-hover table-striped table-bordered table-condensed" hidden>
+  <thead>
+  <tr>
+    <td v-for="thead_td in table.format">{{ thead_td }}</td>
+  </tr>
+  </thead>
+  <tbody>
+  <tr v-for="row in table.data">
+    <td v-for="col in row">{{ col }}</td>
+  </tr>
+  </tbody>
+</table>
+
+
+<!-- JavaScript -->
+<script src="../js/vue.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/leader.min.js"></script>
+<script>
+    root_get_table();
+</script>
+</body>
+</html>

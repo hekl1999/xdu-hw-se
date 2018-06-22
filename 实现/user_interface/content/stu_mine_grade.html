@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>查看成绩</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/main.min.css" rel="stylesheet">
+</head>
+<body class="content">
+<a class="btn btn-default hidden-print" href="#" onclick="window.print()" style="margin-bottom: 10px;"><span class="glyphicon glyphicon-print"></span> 打印</a>
+<table id="mine_grade-table" class="table table-hover table-striped table-bordered table-condensed">
+  <thead>
+  <tr>
+    <td>课程编号</td>
+    <td>课程名</td>
+    <td>课程属性</td>
+    <td>学分</td>
+    <td>成绩</td>
+  </tr>
+  </thead>
+  <tbody hidden>
+  <tr v-for="grade in mine_grades">
+    <td>{{ grade.course_id }}</td>
+    <td>{{ grade.name }}</td>
+    <td>{{ grade.type }}</td>
+    <td>{{ grade.credit }}</td>
+    <td v-bind:class="grade.grade_class">{{ grade.grade }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- JavaScript -->
+<script src="../js/vue.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/leader.min.js"></script>
+<script>
+    stu_mine_grade();
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>教务系统 - 教师端</title>
+  <link rel="stylesheet" href="./layui/css/layui.css">
+  <link rel="stylesheet" href="./css/main.min.css">
+  <link rel="icon" href="./img/title_logo.png">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo">教务系统 - 教师端</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a id="mine-name">
+
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="./change_passwd.html">重置密码</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="#" onclick="logout()">注销</a></li>
+    </ul>
+  </div>
+
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree" lay-filter="test">
+        <li class="layui-nav-item"><a href="content/tea_mine_class.html" target="content">我的课表</a></li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a>学生名单</a>
+          <dl id="class_list-student" class="layui-nav-child">
+          </dl>
+        </li>
+        <li class="layui-nav-item"><a href="content/tea_exam_info.html" target="content">考试安排</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+    <iframe id="content" name="content" height="99%" width="100%" src="content/default.html"></iframe>
+    <!--<div style="padding: 15px;">内容主体区域</div>-->
+  </div>
+
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    Copyright &copy; 2018-2019
+    <a class="signature" href="https://github.com/Keyboard-l">Keyboard-l</a>,
+    <a class="signature" href="https://github.com/oneSaber">oneSaber</a>,
+    <a class="signature" href="https://github.com/bigPeterPan">bigPeterPan</a> and
+    <a class="signature" href="https://github.com/AmorNjr">AmorNjr</a>
+    All Rights Reserved.
+  </div>
+</div>
+
+<!-- JavaScript -->
+<script src="./layui/layui.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/leader.min.js"></script>
+<script src="./js/main.min.js"></script>
+<script>
+  tea_load_classes_list();
+</script>
+</body>
+</html>

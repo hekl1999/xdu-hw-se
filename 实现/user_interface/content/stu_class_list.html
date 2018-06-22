@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>选课</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/main.min.css" rel="stylesheet">
+</head>
+<body class="content">
+<a class="btn btn-default hidden-print" href="#" onclick="window.print()" style="margin-bottom: 10px;"><span class="glyphicon glyphicon-print"></span> 打印</a>
+<table id="classes_list" class="table table-hover table-bordered table-condensed">
+  <thead>
+  <tr align="center">
+    <td colspan="5">课程信息</td>
+    <td colspan="3">上课安排</td>
+    <td colspan="2">选课信息</td>
+  </tr>
+  <tr>
+    <td>课程编号</td>
+    <td>课程名</td>
+    <td>课程属性</td>
+    <td>学分</td>
+    <td>学时</td>
+
+    <td>任课教师</td>
+    <td>教室</td>
+    <td>星期</td>
+
+    <td>选课状态</td>
+    <td>剩余名额</td>
+  </tr>
+  </thead>
+  <tbody hidden>
+  <tr v-for="a_class in all_classes">
+    <td>{{ a_class.course_info.course_id }}</td>
+    <td>{{ a_class.course_info.course_name }}</td>
+    <td>{{ a_class.course_info.type }}</td>
+    <td>{{ a_class.course_info.credit }}</td>
+    <td>{{ a_class.course_info.period }}</td>
+
+    <td><span v-for="teacher in a_class.instructor_name">{{ teacher }} </span></td>
+    <td>{{ a_class.classroom_id }}</td>
+    <td><span v-for="time in a_class.time">{{ time.day }}（{{ time.section }}） </span></td>
+
+    <td v-bind:class="{'success': a_class.select}">
+      <span v-if="a_class.select"><b>已选</b><span class="hidden-print">（<a href="#" v-bind:onclick="'stu_change_selected(\''+a_class.class_id+'\')'">取消</a>）</span></span>
+      <span v-if="!a_class.select"><b>未选</b><span class="hidden-print">（<a href="#" v-bind:onclick="'stu_change_selected(\''+a_class.class_id+'\')'">选择</a>）</span></span>
+    </td>
+    <td v-bind:class="{
+      'success': parseInt(a_class.last_people) > 10,
+      'warning': parseInt(a_class.last_people) <= 10 && parseInt(a_class.last_people) > 5,
+      'danger': parseInt(a_class.last_people) < 5 && parseInt(a_class.last_people),
+      'active': !parseInt(a_class.last_people)
+    }">{{ a_class.last_people }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- JavaScript -->
+<script src="../js/vue.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/leader.min.js"></script>
+<script>
+    stu_classes_list();
+</script>
+</body>
+</html>

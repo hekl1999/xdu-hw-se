@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>课表安排</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/main.min.css" rel="stylesheet">
+</head>
+<body class="content">
+<a class="btn btn-default hidden-print" href="#" onclick="window.print()" style="margin-bottom: 10px;"><span class="glyphicon glyphicon-print"></span> 打印</a>
+<form class="form-inline hidden-print" style="margin-bottom: 10px;">
+  <div class="form-group">
+    <label for="class_id-input">教学班编号</label>
+    <input type="text" class="form-control" id="class_id-input" placeholder="Class ID" autocomplete="off" oninput="input_check()">
+  </div>　
+  <div class="form-group">
+    <label for="classroom_id-input">课室</label>
+    <input type="text" class="form-control" id="classroom_id-input" placeholder="Classroom" autocomplete="off" oninput="input_check()">
+  </div>　
+  <div class="form-group">
+    <label for="week-input">周</label>
+    <input type="text" class="form-control" id="week-input" placeholder="Week" autocomplete="off" oninput="input_check()">
+  </div>　
+  <div class="form-group">
+    <label for="day-input">星期</label>
+    <input type="text" class="form-control" id="day-input" placeholder="Day" autocomplete="off" oninput="input_check()">
+  </div>　
+  <div class="form-group">
+    <label for="section-input">节</label>
+    <input type="text" class="form-control" id="section-input" placeholder="Section" autocomplete="off" oninput="input_check()">
+  </div>　
+  <button type="button" class="btn btn-default" id="submit-btn" title="请补全信息！" onclick="add_schedule_submit()" disabled>增加课表</button>
+</form>
+<table id="schedule_list" class="table table-hover table-bordered table-condensed">
+  <thead>
+  <tr>
+    <td>课表id</td>
+    <td>教学班编号</td>
+    <td>课程名</td>
+    <td>课室</td>
+    <td>周</td>
+    <td>星期</td>
+    <td>节</td>
+    <td class="hidden-print">操作</td>
+  </tr>
+  </thead>
+  <tbody hidden>
+  <tr v-for="schedule in all_schedules" v-bind:id="schedule.schedule_id">
+    <td>{{ schedule.schedule_id }}</td>
+    <td v-bind:id="schedule.schedule_id + '-class'">{{ schedule.class_id }}</td>
+    <td v-bind:id="schedule.schedule_id + '-cour'">{{ schedule.course_name }}</td>
+    <td v-bind:id="schedule.schedule_id + '-room'">{{ schedule.classroom_id }}</td>
+    <td v-bind:id="schedule.schedule_id + '-week'">{{ schedule.week }}</td>
+    <td v-bind:id="schedule.schedule_id + '-day'">{{ schedule.day }}</td>
+    <td v-bind:id="schedule.schedule_id + '-sect'">{{ schedule.section }}</td>
+    <td class="hidden-print">
+      <a href="#" v-bind:onclick="'admin_change_schedule(2, \'' + schedule.schedule_id + '\')'">删除</a>
+      <a href="#" v-bind:onclick="'admin_change_schedule(41, \'' + schedule.schedule_id + '\')'">修改</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- JavaScript -->
+<script src="../js/vue.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/leader.min.js"></script>
+<script>
+    admin_schedule_list();
+    function input_check() {
+        let class_id = $('#class_id-input').val();
+        let classroom_id = $('#classroom_id-input').val();
+        let week = $('#week-input').val();
+        let day = $('#day-input').val();
+        let section = $('#section-input').val();
+        let submit_btn = $('#submit-btn');
+        if (!class_id || !classroom_id || !week || !day || !section) {
+            submit_btn.attr({'class': 'btn btn-default', 'disabled': true, 'title': '请补全信息！'});
+        }
+        else {
+            submit_btn.attr({'class': 'btn btn-primary', 'disabled': false, 'title': '单击发送！'});
+        }
+    }
+    function add_schedule_submit() {
+        let class_id = $('#class_id-input');
+        let classroom_id = $('#classroom_id-input');
+        let week = $('#week-input');
+        let day = $('#day-input');
+        let section = $('#section-input');
+        let data = {
+            class_id: class_id.val(),
+            classroom_id: classroom_id.val(),
+            week: week.val(),
+            day: day.val(),
+            section: section.val()
+        };
+        admin_change_schedule(1, data);
+        class_id.val('');
+        classroom_id.val('');
+        week.val('');
+        day.val('');
+        section.val('');
+    }
+</script>
+</body>
+</html>

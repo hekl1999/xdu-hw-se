@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>查看考试</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/main.min.css" rel="stylesheet">
+</head>
+<body class="content">
+<a class="btn btn-default hidden-print" href="#" onclick="window.print()" style="margin-bottom: 10px;"><span class="glyphicon glyphicon-print"></span> 打印</a>
+<table id="exam_info-table" class="table table-hover table-striped table-bordered table-condensed">
+  <thead>
+  <tr>
+    <td>课程名</td>
+    <td>试室</td>
+    <td>考试日期</td>
+    <td>考试时间</td>
+  </tr>
+  </thead>
+  <tbody hidden>
+  <tr v-for="exam in exams">
+    <td>{{ exam.course_name }}</td>
+    <td>{{ exam.classroom_id }}</td>
+    <td>{{ exam.date }}</td>
+    <td>{{ exam.time }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- JavaScript -->
+<script src="../js/vue.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/leader.min.js"></script>
+<script>
+    stu_exam_info();
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>考试安排</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/main.min.css" rel="stylesheet">
+</head>
+<body class="content">
+<a class="btn btn-default hidden-print" href="#" onclick="window.print()" style="margin-bottom: 10px;"><span class="glyphicon glyphicon-print"></span> 打印</a>
+<table id="exam_info" class="table table-hover table-bordered table-condensed">
+  <thead>
+  <tr>
+    <td>考试编号</td>
+    <td>日期</td>
+    <td>时间</td>
+    <td>考场</td>
+    <td>教学班编号</td>
+  </tr>
+  </thead>
+  <tbody hidden>
+  <tr v-for="exam in all_exams">
+    <td><a v-bind:href="'./admin_exam_info_detail.html?exam_id=' + exam.exam_id">{{ exam.exam_id }}</a></td>
+    <td>{{ exam.date }}</td>
+    <td>{{ exam.time }}</td>
+    <td>{{ exam.classroom_id }}</td>
+    <td>{{ exam.class_id }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- JavaScript -->
+<script src="../js/vue.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/leader.min.js"></script>
+<script>
+    admin_exam_info();
+</script>
+</body>
+</html>
